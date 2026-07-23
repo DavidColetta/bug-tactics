@@ -7,10 +7,8 @@
 
 [node name="Node" type="Node" unique_id=1299204449]
 
-[node name="Navigation" type="Node" parent="." unique_id=817281527 node_paths=PackedStringArray("tilemap_layer_node", "visual_path_line2d")]
+[node name="Navigation" type="Node" parent="." unique_id=817281527]
 script = ExtResource("3_vvh5c")
-tilemap_layer_node = NodePath("../Environment/TileMapLayer")
-visual_path_line2d = NodePath("../Line2D")
 
 [node name="Combat" type="Node" parent="." unique_id=358983306]
 
@@ -31,7 +29,7 @@ tile_set = ExtResource("1_pq8q7")
 
 [node name="Unit" type="Node2D" parent="Combatants" unique_id=145174963]
 script = ExtResource("4_28aoi")
-Y = 1
+Y = 2
 
 [node name="Controllers" type="Node" parent="Combatants/Unit" unique_id=1784078107]
 
@@ -41,7 +39,3 @@ Y = 1
 scale = Vector2(32, 32)
 texture = ExtResource("1_pyidc")
 centered = false
-
-[node name="Line2D" type="Line2D" parent="." unique_id=226289295]
-width = 16.0
-default_color = Color(0, 0, 0, 1)
