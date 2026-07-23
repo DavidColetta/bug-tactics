@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://cnywoev0lrdkr"]
+[gd_scene format=4 uid="uid://cnywoev0lrdkr"]
+
+[ext_resource type="TileSet" uid="uid://b23tg8cc2jneh" path="res://farm_tile_set.tres" id="1_pq8q7"]
+[ext_resource type="Texture2D" uid="uid://do6n2nde5pkk0" path="res://Pixel.png" id="1_pyidc"]
 
 [node name="Node2D" type="Node2D" unique_id=120556281]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=262335509]
+self_modulate = Color(0.5176471, 0.7764706, 0.4117647, 1)
+scale = Vector2(100, 100)
+texture = ExtResource("1_pyidc")
+centered = false
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1987919541]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAA=")
+tile_set = ExtResource("1_pq8q7")
