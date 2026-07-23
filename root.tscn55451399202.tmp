@@ -29,6 +29,7 @@ tile_set = ExtResource("1_pq8q7")
 
 [node name="Unit" type="Node2D" parent="Combatants" unique_id=145174963]
 script = ExtResource("4_28aoi")
+X = null
 Y = 2
 
 [node name="Controllers" type="Node" parent="Combatants/Unit" unique_id=1784078107]
