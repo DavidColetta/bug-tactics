@@ -7,10 +7,11 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=262335509]
 self_modulate = Color(0.5176471, 0.7764706, 0.4117647, 1)
-scale = Vector2(100, 100)
+scale = Vector2(1149, 646)
 texture = ExtResource("1_pyidc")
 centered = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1987919541]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAA=")
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAA=")
 tile_set = ExtResource("1_pq8q7")
