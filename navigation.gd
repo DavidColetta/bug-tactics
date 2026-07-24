@@ -14,7 +14,8 @@ static var grid: Array[Array]
 #1d list of units
 static var units: Array[Unit]
 
-@export var tilemap_layer_node: TileMapLayer
+@export var obstacles_tilemap: TileMapLayer
+@export var highlights_tilemap: TileMapLayer
 @export var visual_path_line2d: Line2D
 
 # call this function to move a unit around
@@ -29,28 +30,47 @@ static func moveUnit(X, Y, toX, toY) -> void:
 	unit.X = toX
 	unit.Y = toY
 
-func pathfind(subject: Unit, target: Vector2i) -> PackedVector2Array:
+func highlight_tiles_in_range(center: Vector2i, distance: int):
+	var condition = func(x: int, y: int) -> bool:
+		var pathlength := pathfind(center, Vector2i(x,y)).size()
+		return pathlength > 0 and pathlength <= distance
+		
+	highlight_tiles(condition)
+
+func highlight_tiles(condition: Callable):
+	for i in range(maxX):
+		for j in range(maxY):
+			if condition.call(i, j):
+				#highlight a tile (right now the highlight sprite is a placeholder)
+				highlights_tilemap.set_cell(Vector2i(i, j), 0, Vector2i(0, 8))
+			else:
+				highlights_tilemap.set_cell(Vector2i(i, j), -1)
+	
+
+func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:
 	visual_path_line2d.global_position = Vector2(tile_size/2.0, tile_size/2.0)
 	
 	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
-	pathfinding_grid.region = tilemap_layer_node.get_used_rect()
+	pathfinding_grid.region = obstacles_tilemap.get_used_rect()
 	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
 	pathfinding_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinding_grid.update()
 	
-	for tile in tilemap_layer_node.get_used_cells():
+	for tile in obstacles_tilemap.get_used_cells():
 		pathfinding_grid.set_point_solid(tile)
 	
 	for unit in units:
 		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
 	
-	var path := pathfinding_grid.get_point_path(subject.get_pos(), target)
-	visual_path_line2d.points = path # display the path
-	
+	var path := pathfinding_grid.get_point_path(subject, target)
 	return path
 
 func _ready() -> void:	
 	instance = self
+	
+	maxX = obstacles_tilemap.get_used_rect().end.x
+	maxY = obstacles_tilemap.get_used_rect().end.y
+	
 	# initialize empty 2d array grid
 	grid = []
 	for i in range(maxX):
