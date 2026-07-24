@@ -31,6 +31,7 @@ func get_pos() -> Vector2i:
 
 func move_to(target: Vector2i):
 	var path = Navigation.instance.pathfind(get_pos(), target)
+	Navigation.instance.visual_path_line2d.global_position = Vector2(Navigation.tile_size/2.0, Navigation.tile_size/2.0)
 	Navigation.instance.visual_path_line2d.points = path # display the path
 	path.remove_at(0) #remove the first step on the path, since we are already there
 	
@@ -53,4 +54,4 @@ func _ready() -> void:
 	$HP_Bar/ProgressBar.value = HP
 	
 	#example of pathfinding
-	move_to(Vector2i(6,4))
+	#move_to(Vector2i(6,4))

@@ -9,7 +9,7 @@ static var units = Navigation.units
 
 enum UnitTypes {Swarm, Crawler, Air}
 
-static func get_distance_between_units(Unit1: Unit, Unit2: Unit) -> int:
+static func get_absolute_distance_between_units(Unit1: Unit, Unit2: Unit) -> int:
 	return abs(Unit1.X - Unit2.X) + abs(Unit1.Y - Unit2.Y)
 
 static func make_unit_attack_other_unit(Unit1: Unit, Unit2: Unit):

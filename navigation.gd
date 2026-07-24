@@ -39,7 +39,7 @@ static func getUnitAtPosition(X, Y) -> Unit:
 func highlight_tiles_in_range(center: Vector2i, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()
-		return pathlength > 1 and pathlength <= distance + 1
+		return pathlength > 0 and pathlength <= distance + 1
 		
 	highlight_tiles(condition)
 
@@ -55,9 +55,26 @@ func highlight_tiles(condition: Callable):
 func unhighlight_tiles():
 	highlights_tilemap.clear()
 
-func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:
-	visual_path_line2d.global_position = Vector2(tile_size/2.0, tile_size/2.0)
+func get_pathfinding_distance(subject: Vector2i, target: Vector2i) -> int:
+	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
+	pathfinding_grid.region = obstacles_tilemap.get_used_rect()
+	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
+	pathfinding_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	pathfinding_grid.update()
 	
+	for tile in obstacles_tilemap.get_used_cells():
+		pathfinding_grid.set_point_solid(tile)
+	
+	for unit in units:
+		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
+	
+	pathfinding_grid.set_point_solid(subject, false)
+	pathfinding_grid.set_point_solid(target, false)
+	var path := pathfinding_grid.get_point_path(subject, target)
+	return path.size()
+	
+
+func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:	
 	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
 	pathfinding_grid.region = obstacles_tilemap.get_used_rect()
 	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
