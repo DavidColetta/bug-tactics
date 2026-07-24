@@ -45,7 +45,9 @@ func highlight_tiles(condition: Callable):
 				highlights_tilemap.set_cell(Vector2i(i, j), 0, Vector2i(0, 8))
 			else:
 				highlights_tilemap.set_cell(Vector2i(i, j), -1)
-	
+
+func unhighlight_tiles():
+	highlights_tilemap.clear()
 
 func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:
 	visual_path_line2d.global_position = Vector2(tile_size/2.0, tile_size/2.0)
