@@ -50,6 +50,21 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_jnlp7")
 centered = false
 
+[node name="HP_Bar" type="Control" parent="Combatants/Unit" unique_id=460670451]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Combatants/Unit/HP_Bar" unique_id=634882394]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 9.0
+step = 1.0
+value = 76.0
+show_percentage = false
+
 [node name="Line2D" type="Line2D" parent="." unique_id=226289295]
 width = 4.0
 default_color = Color(0, 0, 0, 1)
