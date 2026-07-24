@@ -4,8 +4,12 @@
 [ext_resource type="TileSet" uid="uid://b23tg8cc2jneh" path="res://farm_tile_set.tres" id="1_pq8q7"]
 [ext_resource type="Texture2D" uid="uid://do6n2nde5pkk0" path="res://Pixel.png" id="1_pyidc"]
 [ext_resource type="Script" uid="uid://ch08jobwvyru" path="res://navigation.gd" id="3_vvh5c"]
+[ext_resource type="Script" uid="uid://bxogpw8bbrhgl" path="res://combat.gd" id="3_vyht1"]
 [ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="4_28aoi"]
 [ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="5_jnlp7"]
+[ext_resource type="Script" uid="uid://c2jh05lgh55f1" path="res://nest.gd" id="6_bf3um"]
+[ext_resource type="Script" uid="uid://ckh7sdjn55xb4" path="res://ui/ui.gd" id="7_bf3um"]
+[ext_resource type="Script" uid="uid://cjc0ptgrsth1f" path="res://ui/unitinfo.gd" id="7_vyht1"]
 
 [node name="Node" type="Node" unique_id=1299204449]
 script = ExtResource("1_l8v81")
@@ -17,6 +21,7 @@ highlights_tilemap = NodePath("../Environment/HighlightLayer")
 visual_path_line2d = NodePath("../Line2D")
 
 [node name="Combat" type="Node" parent="." unique_id=358983306]
+script = ExtResource("3_vyht1")
 
 [node name="Environment" type="Node2D" parent="." unique_id=120556281]
 
@@ -36,6 +41,34 @@ self_modulate = Color(1, 1, 1, 0.61960787)
 scale = Vector2(2, 2)
 tile_set = ExtResource("1_pq8q7")
 
+[node name="Nests" type="Node2D" parent="." unique_id=1032789667]
+
+[node name="PlayerHome" type="Node2D" parent="Nests" unique_id=887353117]
+position = Vector2(100.34, 0)
+script = ExtResource("6_bf3um")
+X = 6
+Y = 4
+
+[node name="HP_Bar" type="Control" parent="Nests/PlayerHome" unique_id=1437980340]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 31.660004
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Nests/PlayerHome/HP_Bar" unique_id=1629689246]
+layout_mode = 0
+offset_right = 32.660004
+offset_bottom = 7.3485007
+step = 1.0
+value = 76.0
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1478742400]
+scale = Vector2(32, 32)
+texture = ExtResource("1_pyidc")
+centered = false
+
 [node name="Combatants" type="Node2D" parent="." unique_id=968853647]
 
 [node name="Unit" type="Node2D" parent="Combatants" unique_id=145174963]
@@ -48,6 +81,31 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_jnlp7")
 centered = false
 
+[node name="HP_Bar" type="Control" parent="Combatants/Unit" unique_id=460670451]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Combatants/Unit/HP_Bar" unique_id=634882394]
+layout_mode = 0
+offset_right = 35.0
+offset_bottom = 7.875
+step = 1.0
+value = 76.0
+show_percentage = false
+
 [node name="Line2D" type="Line2D" parent="." unique_id=226289295]
 width = 4.0
 default_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=380945793]
+script = ExtResource("7_bf3um")
+
+[node name="UnitInfo" type="Label" parent="UI" unique_id=1021289715]
+offset_left = 40.0
+offset_top = 482.0
+offset_right = 237.0
+offset_bottom = 582.0
+script = ExtResource("7_vyht1")
