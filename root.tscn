@@ -135,3 +135,12 @@ offset_right = 237.0
 offset_bottom = 582.0
 text = "Test"
 script = ExtResource("7_vyht1")
+
+[node name="EndTurnButton" type="Button" parent="UI" unique_id=1748051883]
+offset_left = 971.0
+offset_top = 487.0
+offset_right = 1029.0
+offset_bottom = 514.0
+text = "End Turn"
+
+[connection signal="button_down" from="UI/EndTurnButton" to="." method="end_turn"]

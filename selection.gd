@@ -36,3 +36,21 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
+
+func end_turn():
+	if is_player_turn:
+		for nest in Navigation.nests:
+			if nest.Team != Combat.Team.PLAYER:
+				for unit in Navigation.units:
+					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
+						nest.attack_nest(unit)
+	else:
+		for nest in Navigation.nests:
+			if nest.Team != Combat.Team.ENEMY:
+				for unit in Navigation.units:
+					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
+						nest.attack_nest(unit)
+	
+	is_player_turn = !is_player_turn
+	
+	

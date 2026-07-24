@@ -14,6 +14,8 @@ static var grid: Array[Array]
 #1d list of units
 static var units: Array[Unit]
 
+static var nests: Array[Nest]
+
 @export var obstacles_tilemap: TileMapLayer
 @export var highlights_tilemap: TileMapLayer
 @export var visual_path_line2d: Line2D
@@ -72,7 +74,6 @@ func get_pathfinding_distance(subject: Vector2i, target: Vector2i) -> int:
 	pathfinding_grid.set_point_solid(target, false)
 	var path := pathfinding_grid.get_point_path(subject, target)
 	return path.size()
-	
 
 func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:	
 	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()

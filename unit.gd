@@ -1,7 +1,7 @@
 class_name Unit
 extends Node2D
 
-@export var is_player_team := true
+@export var Team := Combat.Team.PLAYER
 
 # position (please move unit by calling MoveUnit in Navigation)
 @export var X = 0:
