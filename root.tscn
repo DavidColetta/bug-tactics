@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://c2jh05lgh55f1" path="res://nest.gd" id="6_bf3um"]
 [ext_resource type="Script" uid="uid://ckh7sdjn55xb4" path="res://ui/ui.gd" id="7_bf3um"]
-[ext_resource type="Script" uid="uid://cjc0ptgrsth1f" path="res://ui/unitinfo.gd" id="7_vyht1"]
+[ext_resource type="Script" uid="uid://cjc0ptgrsth1f" path="res://ui/unit_info.gd" id="7_vyht1"]
 
 [node name="Node" type="Node" unique_id=1299204449]
 script = ExtResource("1_l8v81")
@@ -133,5 +133,18 @@ offset_left = 40.0
 offset_top = 482.0
 offset_right = 237.0
 offset_bottom = 582.0
-text = "Test"
+text = "UnitInfo"
 script = ExtResource("7_vyht1")
+
+[node name="ActionMenu" type="ItemList" parent="UI" unique_id=398734349]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_bottom = 90.0
+grow_horizontal = 0
+item_count = 3
+item_0/text = "Attack"
+item_1/text = "Back"
+item_2/text = "Wait"

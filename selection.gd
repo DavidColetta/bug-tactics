@@ -16,15 +16,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		var obstacles_local_pos = $Navigation.obstacles_tilemap.get_local_mouse_position()
 		var obstacles_cell_coords = $Navigation.obstacles_tilemap.local_to_map(obstacles_local_pos)
 		
-		var prev_selected_unit = selected_unit
-		selected_unit = Navigation.getUnitAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
-		if cell_highlighted:
+		var new_selected_unit = Navigation.getUnitAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
+		if cell_highlighted and selected_unit.is_player_team:
 			print("Selected highlighted cell")
-			prev_selected_unit.move_to(highlights_cell_coords)
+			selected_unit.move_to(highlights_cell_coords)
 			Navigation.instance.unhighlight_tiles()
-			#need to display menu after unit finishes moving
-#			#event emit to show actions, after clicking action then remove unit info ui
-		elif selected_unit:
+			await Events.move_animation_ended
+			$UI/ActionMenu.visible = true
+		elif new_selected_unit:
+			selected_unit = new_selected_unit
 			print("Selected "+selected_unit.name)
 			Navigation.instance.highlight_tiles_in_range(selected_unit.get_pos(), selected_unit.move_range)
 			Events.unit_clicked.emit(selected_unit)
