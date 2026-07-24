@@ -24,6 +24,8 @@ extends Node2D
 
 @export var DAMAGE_TO_TYPES := [50, 50, 25]
 
+@export var move_range = 4
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
@@ -44,7 +46,7 @@ func _on_position_updated() -> void:
 	position.y = Y * Navigation.tile_size
 	
 	if Navigation.instance and Selection.selected_unit == self:
-		Navigation.instance.highlight_tiles_in_range(get_pos(), 5)
+		Navigation.instance.highlight_tiles_in_range(get_pos(), move_range)
 
 func _ready() -> void:
 	_on_position_updated()
@@ -54,4 +56,4 @@ func _ready() -> void:
 	$HP_Bar/ProgressBar.value = HP
 	
 	#example of pathfinding
-	move_to(Vector2i(7,6))
+	move_to(Vector2i(6,4))

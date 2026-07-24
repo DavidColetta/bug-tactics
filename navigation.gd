@@ -39,7 +39,7 @@ static func getUnitAtPosition(X, Y) -> Unit:
 func highlight_tiles_in_range(center: Vector2i, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()
-		return pathlength > 0 and pathlength <= distance
+		return pathlength > 1 and pathlength <= distance + 1
 		
 	highlight_tiles(condition)
 
