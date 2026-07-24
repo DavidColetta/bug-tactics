@@ -37,9 +37,6 @@ func move_to(target: Vector2i):
 	for step in path: #wait briefly and then move to the next step on the path
 		await get_tree().create_timer(0.25).timeout
 		Navigation.moveUnit(X, Y, step.x/Navigation.tile_size, step.y/Navigation.tile_size)
-	
-	#example of an attack (it's attacking itself here)
-	Combat.make_unit_attack_other_unit(self, self)
 
 func _on_position_updated() -> void:
 	position.x = X * Navigation.tile_size
