@@ -49,6 +49,11 @@ script = ExtResource("6_bf3um")
 X = 6
 Y = 4
 
+[node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1478742400]
+scale = Vector2(32, 32)
+texture = ExtResource("1_pyidc")
+centered = false
+
 [node name="HP_Bar" type="Control" parent="Nests/PlayerHome" unique_id=1437980340]
 layout_mode = 3
 anchors_preset = 0
@@ -58,16 +63,13 @@ offset_bottom = 40.0
 
 [node name="ProgressBar" type="ProgressBar" parent="Nests/PlayerHome/HP_Bar" unique_id=1629689246]
 layout_mode = 0
-offset_right = 32.660004
-offset_bottom = 7.3485007
+offset_left = -1.3399963
+offset_top = -31.0
+offset_right = 31.320007
+offset_bottom = -23.651499
 step = 1.0
 value = 76.0
 show_percentage = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1478742400]
-scale = Vector2(32, 32)
-texture = ExtResource("1_pyidc")
-centered = false
 
 [node name="Combatants" type="Node2D" parent="." unique_id=968853647]
 
