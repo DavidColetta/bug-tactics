@@ -8,8 +8,9 @@ var unit: Unit:
 
 
 func update_text():
-	text = "Name: " + unit.unit_name 
-	text += "\nHealth: " + str(unit.health)
-	text += "\nMovement: " + str(unit.num_moves)
-	text += "\nType: " + unit.movement_type
-	text += "\nVision: " + str(unit.vision)
+	#text = "Name: " + unit.unit_name 
+	#text += "\nHealth: " + str(unit.health)
+	#text += "\nMovement: " + str(unit.num_moves)
+	#text += "\nType: " + unit.movement_type
+	#text += "\nVision: " + str(unit.vision)
+	text = "placeholder (need to update to use actual unit data)"

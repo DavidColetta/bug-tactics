@@ -1,6 +1,8 @@
 class_name Unit
 extends Node2D
 
+@export var is_player_team := true
+
 # position (please move unit by calling MoveUnit in Navigation)
 @export var X = 0:
 	set(new_value):
@@ -11,13 +13,18 @@ extends Node2D
 		Y = new_value
 		_on_position_updated()
 
-#unit stats
-var unit_name = "Ant"
-var health = 10
-var life_span = 4
-var movement_type = "Swarm"
-var num_moves = 3
-var vision = 2
+@export var HP = 100:
+	set(new_value):
+		HP = new_value
+		$HP_Bar/ProgressBar.value = new_value
+
+#@export var Species := Combat.UnitSpecies.INFANTRY
+
+@export var Type := Combat.UnitTypes.Swarm
+
+@export var DAMAGE_TO_TYPES := [50, 50, 25]
+
+@export var move_range = 4
 
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
@@ -30,17 +37,23 @@ func move_to(target: Vector2i):
 	for step in path: #wait briefly and then move to the next step on the path
 		await get_tree().create_timer(0.25).timeout
 		Navigation.moveUnit(X, Y, step.x/Navigation.tile_size, step.y/Navigation.tile_size)
+	
+	#example of an attack (it's attacking itself here)
+	Combat.make_unit_attack_other_unit(self, self)
 
 func _on_position_updated() -> void:
 	position.x = X * Navigation.tile_size
 	position.y = Y * Navigation.tile_size
 	
 	if Navigation.instance and Selection.selected_unit == self:
-		Navigation.instance.highlight_tiles_in_range(get_pos(), 5)
+		Navigation.instance.highlight_tiles_in_range(get_pos(), move_range)
 
 func _ready() -> void:
 	_on_position_updated()
 	Navigation.grid[X][Y] = self
+	Navigation.units.append(self)
+	
+	$HP_Bar/ProgressBar.value = HP
 	
 	#example of pathfinding
-	move_to(Vector2i(7,6))
+	move_to(Vector2i(6,4))
