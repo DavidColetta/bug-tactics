@@ -11,6 +11,14 @@ extends Node2D
 		Y = new_value
 		_on_position_updated()
 
+#unit stats
+var unit_name = "Ant"
+var health = 10
+var life_span = 4
+var movement_type = "Swarm"
+var num_moves = 3
+var vision = 2
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
