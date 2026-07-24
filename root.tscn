@@ -98,7 +98,7 @@ show_percentage = false
 
 [node name="Unit2" type="Node2D" parent="Combatants" unique_id=674029823]
 script = ExtResource("4_28aoi")
-X = 1
+X = 2
 Y = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Combatants/Unit2" unique_id=2050691677]
