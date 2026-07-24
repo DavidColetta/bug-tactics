@@ -17,8 +17,6 @@ static var units: Array[Unit]
 @export var tilemap_layer_node: TileMapLayer
 @export var visual_path_line2d: Line2D
 
-var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
-
 # call this function to move a unit around
 static func moveUnit(X, Y, toX, toY) -> void:
 	if grid[toX][toY] != null:
@@ -31,9 +29,10 @@ static func moveUnit(X, Y, toX, toY) -> void:
 	unit.X = toX
 	unit.Y = toY
 
-func pathfind(subject: Unit, target: Vector2i):
+func pathfind(subject: Unit, target: Vector2i) -> PackedVector2Array:
 	visual_path_line2d.global_position = Vector2(tile_size/2.0, tile_size/2.0)
 	
+	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
 	pathfinding_grid.region = tilemap_layer_node.get_used_rect()
 	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
 	pathfinding_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
@@ -46,9 +45,9 @@ func pathfind(subject: Unit, target: Vector2i):
 		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
 	
 	var path := pathfinding_grid.get_point_path(subject.get_pos(), target)
-	visual_path_line2d.points = path
-
-
+	visual_path_line2d.points = path # display the path
+	
+	return path
 
 func _ready() -> void:	
 	instance = self

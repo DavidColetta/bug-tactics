@@ -14,6 +14,13 @@ extends Node2D
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
+func move_to(target: Vector2i):
+	var path = Navigation.instance.pathfind(self, target)
+	
+	for step in path:
+		Navigation.moveUnit(X, Y, step.x/Navigation.tile_size, step.y/Navigation.tile_size)
+		await get_tree().create_timer(0.15).timeout
+
 func _on_position_updated() -> void:
 	position.x = X * Navigation.tile_size
 	position.y = Y * Navigation.tile_size
@@ -23,4 +30,6 @@ func _ready() -> void:
 	Navigation.grid[X][Y] = self
 	
 	#example of pathfinding
-	Navigation.instance.pathfind(self, Vector2i(2,6))
+	#Navigation.instance.pathfind(self, Vector2i(7,6))
+	
+	move_to(Vector2i(7,6))

@@ -24,7 +24,7 @@ centered = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment" unique_id=1987919541]
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAACAAEAAAADAAMAAAAAAAQAAAAEAAUAAAAFAAMAAAAFAAYAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAACAAEAAAADAAMAAAAAAAQAAAAEAAUAAAA=")
 tile_set = ExtResource("1_pq8q7")
 
 [node name="Combatants" type="Node2D" parent="." unique_id=968853647]
@@ -33,6 +33,10 @@ tile_set = ExtResource("1_pq8q7")
 script = ExtResource("4_28aoi")
 X = 1
 Y = 1
+
+[node name="Controllers" type="Node" parent="Combatants/Unit" unique_id=1784078107]
+
+[node name="Action Controller" type="Node" parent="Combatants/Unit/Controllers" unique_id=1382647155]
 
 [node name="Sprite2D" type="Sprite2D" parent="Combatants/Unit" unique_id=2107277240]
 scale = Vector2(32, 32)
