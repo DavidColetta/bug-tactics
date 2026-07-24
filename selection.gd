@@ -9,11 +9,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		var local_pos = $Navigation.obstacles_tilemap.get_local_mouse_position()
 		var cell_coords = $Navigation.obstacles_tilemap.local_to_map(local_pos)
 		
-		selected_unit = Navigation.grid[cell_coords.x][cell_coords.y]
+		
+		selected_unit = Navigation.getUnitAtPosition(cell_coords.x, cell_coords.y)
 		if selected_unit:
 			print("Selected "+selected_unit.name)
 			Navigation.instance.highlight_tiles_in_range(selected_unit.get_pos(), 5)
 		else:
 			print("Selected empty")
 			Navigation.instance.unhighlight_tiles()
-		

@@ -30,6 +30,12 @@ static func moveUnit(X, Y, toX, toY) -> void:
 	unit.X = toX
 	unit.Y = toY
 
+static func getUnitAtPosition(X, Y) -> Unit:
+	if X >= 0 and X < maxX and Y >= 0 and Y < maxY:
+		return grid[X][Y]
+	else:
+		return null
+
 func highlight_tiles_in_range(center: Vector2i, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()
@@ -64,6 +70,7 @@ func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:
 	for unit in units:
 		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
 	
+	pathfinding_grid.set_point_solid(subject, false)
 	var path := pathfinding_grid.get_point_path(subject, target)
 	return path
 

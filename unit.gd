@@ -11,6 +11,14 @@ extends Node2D
 		Y = new_value
 		_on_position_updated()
 
+@export var HP = 100
+
+#@export var Species := Combat.UnitSpecies.INFANTRY
+
+@export var Type := Combat.UnitTypes.Swarm
+
+@export var DAMAGE_TO_TYPES := [40, 50, 25]
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
@@ -33,6 +41,7 @@ func _on_position_updated() -> void:
 func _ready() -> void:
 	_on_position_updated()
 	Navigation.grid[X][Y] = self
+	Navigation.units.append(self)
 	
 	#example of pathfinding
 	move_to(Vector2i(7,6))
