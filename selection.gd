@@ -44,13 +44,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			middle_of_move = true
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
-			if new_selected_nest and new_selected_nest.Team == selected_unit.Team: #enable Claim action
-				pass
-				#$UI/ActionMenu
+			if new_selected_nest and new_selected_nest.Team != selected_unit.Team: #enable Claim action
+				set_capture_btn_disabled(false)
+			else:
+				set_capture_btn_disabled(true)
 			#check if on top of a nest that isnt on player's team
 			#check if any enemies in attack range
-			$UI/ActionMenu.visible = true
-		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER:
+			ActionMenu.instance.visible = true
+		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER and not new_selected_unit:
 			selected_unit = null
 			selected_nest = new_selected_nest
 			print("Selected Nest "+selected_nest.name)
@@ -72,13 +73,13 @@ func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
 	selected_nest = null
-	$UI/ActionMenu.item_selected.connect(back_button_pressed)
+	ActionMenu.instance.item_selected.connect(back_button_pressed)
 
-func can_claim_nest():
-	for nest in Navigation.nests:
-		if selected_unit.get_pos() == nest.get_pos() and selected_unit.Team != nest.Team:
-			return true
-	return false
+func set_capture_btn_disabled(disabled):
+	for i in ActionMenu.instance.item_count:
+		if ActionMenu.instance.get_item_text(i) == "Capture":
+			ActionMenu.instance.set_item_disabled(i, disabled)
+			break
 
 func can_attack():
 	pass
