@@ -45,12 +45,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			Navigation.instance.unhighlight_tiles()
 			if highlights_cell_coords != selected_unit.get_pos():
 				await Events.move_animation_ended
-			print("move anim ended")
+			
 			if new_selected_nest and new_selected_nest.Team != selected_unit.Team: #enable Claim action
 				set_capture_btn_disabled(false)
 			else:
 				set_capture_btn_disabled(true)
-			#check if on top of a nest that isnt on player's team
+			
 			#check if any enemies in attack range
 			ActionMenu.instance.visible = true
 		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER and not new_selected_unit:

@@ -44,6 +44,48 @@ static func getNestAtPosition(X, Y) -> Nest:
 			return nest
 	return null
 
+func get_units_in_attack_range(center: Unit):
+	var can_attack = func(unit: Unit) -> bool:
+		return unit != null and unit.Team != center.Team
+	var attackable: Array[Unit] = []
+	var center_pos = center.get_pos()
+	
+	for dx in range(center.min_attack_range, center.max_attack_range + 1):
+		var unit = getUnitAtPosition(center_pos.x + dx, center_pos.y)
+		if can_attack.call(unit):
+			attackable.append(unit)
+		
+		unit = getUnitAtPosition(center_pos.x - dx, center_pos.y)
+		if can_attack.call(unit):
+			attackable.append(unit)
+	
+	for dy in range(center.min_attack_range, center.max_attack_range + 1):
+		for dx in center.max_attack_range - dy + 1:
+			var unit = getUnitAtPosition(center_pos.x + dx, center_pos.y + dy)
+			if can_attack.call(unit):
+				attackable.append(unit)
+			
+			unit = getUnitAtPosition(center_pos.x + dx, center_pos.y - dy)
+			if can_attack.call(unit):
+				attackable.append(unit)
+			
+			if dx != 0:
+				unit = getUnitAtPosition(center_pos.x - dx, center_pos.y + dy)
+				if can_attack.call(unit):
+					attackable.append(unit)
+				
+				unit = getUnitAtPosition(center_pos.x - dx, center_pos.y - dy)
+				if can_attack.call(unit):
+					attackable.append(unit)
+	
+	return attackable
+	#am too sleepy continuing this tmrw
+	#check if there exists any units not on center's team in attack range
+	#if so enable attack button
+	#when attack button is clicked keep highlight map and wait for player to click on an opposing unit
+	#and then call attacking function from combat.gd and end unit's turn
+	#also make sure to make the checking for opponents function here and call in selection.gd under the capture stuff
+
 func highlight_tiles_in_range(center: Unit, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()
