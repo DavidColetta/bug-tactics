@@ -38,7 +38,7 @@ static func getUnitAtPosition(X, Y) -> Unit:
 	else:
 		return null
 
-func highlight_tiles_in_range(center: Vector2i, distance: int):
+func highlight_tiles_in_range(center: Unit, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()
 		return pathlength > 0 and pathlength <= distance + 1
@@ -57,25 +57,10 @@ func highlight_tiles(condition: Callable):
 func unhighlight_tiles():
 	highlights_tilemap.clear()
 
-func get_pathfinding_distance(subject: Vector2i, target: Vector2i) -> int:
-	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
-	pathfinding_grid.region = obstacles_tilemap.get_used_rect()
-	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
-	pathfinding_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	pathfinding_grid.update()
-	
-	for tile in obstacles_tilemap.get_used_cells():
-		pathfinding_grid.set_point_solid(tile)
-	
-	for unit in units:
-		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
-	
-	pathfinding_grid.set_point_solid(subject, false)
-	pathfinding_grid.set_point_solid(target, false)
-	var path := pathfinding_grid.get_point_path(subject, target)
-	return path.size()
+func get_pathfinding_distance(subject: Unit, target: Vector2i) -> int:
+	return pathfind(subject, target, true).size()
 
-func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:	
+func pathfind(subject: Unit, target: Vector2i, allow_solid_destination := false) -> PackedVector2Array:
 	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
 	pathfinding_grid.region = obstacles_tilemap.get_used_rect()
 	pathfinding_grid.cell_size = Vector2(tile_size, tile_size)
@@ -86,10 +71,13 @@ func pathfind(subject: Vector2i, target: Vector2i) -> PackedVector2Array:
 		pathfinding_grid.set_point_solid(tile)
 	
 	for unit in units:
-		pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
+		if unit.Team != subject.Team or unit.get_pos() == target:
+			pathfinding_grid.set_point_solid(Vector2i(unit.X, unit.Y), true)
 	
-	pathfinding_grid.set_point_solid(subject, false)
-	var path := pathfinding_grid.get_point_path(subject, target)
+	pathfinding_grid.set_point_solid(subject.get_pos(), false)
+	if allow_solid_destination:
+		pathfinding_grid.set_point_solid(target, false)
+	var path := pathfinding_grid.get_point_path(subject.get_pos(), target)
 	return path
 
 func _ready() -> void:	

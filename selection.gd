@@ -31,7 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif new_selected_unit:
 			selected_unit = new_selected_unit
 			print("Selected "+selected_unit.name)
-			Navigation.instance.highlight_tiles_in_range(selected_unit.get_pos(), selected_unit.move_range)
+			Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)
 			Events.unit_clicked.emit(selected_unit)
 		else:
 			print("Selected empty")
@@ -44,18 +44,18 @@ func _ready() -> void:
 	$UI/ActionMenu.item_selected.connect(back_button_pressed)
 
 func end_turn():
-	if is_player_turn:
-		for nest in Navigation.nests:
-			if nest.Team != Combat.Team.PLAYER:
-				for unit in Navigation.units:
-					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
-						nest.attack_nest(unit)
-	else:
-		for nest in Navigation.nests:
-			if nest.Team != Combat.Team.ENEMY:
-				for unit in Navigation.units:
-					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
-						nest.attack_nest(unit)
+	#if is_player_turn:
+		#for nest in Navigation.nests:
+			#if nest.Team != Combat.Team.PLAYER:
+				#for unit in Navigation.units:
+					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
+						#nest.attack_nest(unit)
+	#else:
+		#for nest in Navigation.nests:
+			#if nest.Team != Combat.Team.ENEMY:
+				#for unit in Navigation.units:
+					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
+						#nest.attack_nest(unit)
 	
 	is_player_turn = !is_player_turn
 	
