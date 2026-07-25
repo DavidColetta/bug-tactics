@@ -18,7 +18,7 @@ static var selected_nest: Nest
 static var player_pennies = 0:
 	set(new_value):
 		player_pennies = new_value
-		UI.instance.get_node("PenniesLabel").text = "¢%.2f" % (player_pennies/100.0)
+		UI.instance.get_node("PenniesLabel").text = "$%.2f" % (player_pennies/100.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

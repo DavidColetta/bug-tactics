@@ -7,6 +7,9 @@ static var instance := self
 
 func _ready() -> void:
 	instance = self
+	
+	for i in range(item_count):
+		set_item_text(i, get_item_text(i)+" $%.2f" % (prefabs[i].cost/100.0))
 
 func _on_shop_menu_item_selected(index: int) -> void:
 	attempt_to_buy(index, Combat.Team.PLAYER)
