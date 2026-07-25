@@ -30,6 +30,8 @@ extends Node2D
 
 @export var max_attack_range = 1
 
+@export var moved = false
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
@@ -53,12 +55,18 @@ func _on_position_updated() -> void:
 	if Navigation.instance and Selection.selected_unit == self:
 		Navigation.instance.highlight_tiles_in_range(self, move_range)
 
+func finished_move(btn_idx: int):
+	if btn_idx == 2:
+		moved = true
+
 func _ready() -> void:
 	_on_position_updated()
 	Navigation.grid[X][Y] = self
 	Navigation.units.append(self)
 	
 	$HP_Bar/ProgressBar.value = HP
+	
+	ActionMenu.instance.item_selected.connect(finished_move)
 	
 	#example of pathfinding
 	#move_to(Vector2i(6,4))

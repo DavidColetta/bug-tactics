@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
 			$UI/ActionMenu.visible = true
-		elif new_selected_unit:
+		elif new_selected_unit and not new_selected_unit.moved:
 			selected_unit = new_selected_unit
 			print("Selected "+selected_unit.name)
 			Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)

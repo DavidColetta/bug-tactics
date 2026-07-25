@@ -80,6 +80,10 @@ func pathfind(subject: Unit, target: Vector2i, allow_solid_destination := false)
 	var path := pathfinding_grid.get_point_path(subject.get_pos(), target)
 	return path
 
+func turn_ended():
+	for unit in units:
+		unit.moved = false
+
 func _ready() -> void:	
 	instance = self
 	
@@ -93,3 +97,5 @@ func _ready() -> void:
 		for j in range(maxY):
 			column.append(null)
 		grid.append(column)
+	
+	EndTurn.instance.button_down.connect(turn_ended)
