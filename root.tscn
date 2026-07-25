@@ -94,8 +94,8 @@ tile_set = ExtResource("1_pq8q7")
 position = Vector2(100.34, 0)
 script = ExtResource("6_bf3um")
 Team = 0
-X = 6
-Y = 4
+X = 5
+Y = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1478742400]
 scale = Vector2(32, 32)

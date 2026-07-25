@@ -43,7 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			selected_unit.move_to(highlights_cell_coords)
 			middle_of_move = true
 			Navigation.instance.unhighlight_tiles()
-			await Events.move_animation_ended
+			if highlights_cell_coords != selected_unit.get_pos():
+				await Events.move_animation_ended
+			print("move anim ended")
 			if new_selected_nest and new_selected_nest.Team != selected_unit.Team: #enable Claim action
 				set_capture_btn_disabled(false)
 			else:
