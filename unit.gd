@@ -30,7 +30,7 @@ func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
 func move_to(target: Vector2i):
-	var path = Navigation.instance.pathfind(get_pos(), target)
+	var path = Navigation.instance.pathfind(self, target)
 	Navigation.instance.visual_path_line2d.global_position = Vector2(Navigation.tile_size/2.0, Navigation.tile_size/2.0)
 	Navigation.instance.visual_path_line2d.points = path # display the path
 	path.remove_at(0) #remove the first step on the path, since we are already there
@@ -44,7 +44,7 @@ func _on_position_updated() -> void:
 	position.y = Y * Navigation.tile_size
 	
 	if Navigation.instance and Selection.selected_unit == self:
-		Navigation.instance.highlight_tiles_in_range(get_pos(), move_range)
+		Navigation.instance.highlight_tiles_in_range(self, move_range)
 
 func _ready() -> void:
 	_on_position_updated()
