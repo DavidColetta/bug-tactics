@@ -58,6 +58,7 @@ func _on_position_updated() -> void:
 func finished_move(btn_idx: int):
 	if ActionMenu.instance.get_item_text(btn_idx) == "Wait":
 		moved = true
+		Selection.middle_of_move = false
 
 func _ready() -> void:
 	_on_position_updated()
