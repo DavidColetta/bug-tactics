@@ -43,6 +43,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if not valid_attack:
 				return
 			Combat.make_unit_attack_other_unit(selected_unit, new_selected_unit)
+			Navigation.instance.unhighlight_tiles()
 			selected_unit.finished_move()
 		elif cell_highlighted and selected_unit.Team == Combat.Team.PLAYER and is_player_turn:
 			print("Selected highlighted cell")
@@ -74,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			$UI/ShopMenu.visible = false
 			selected_unit = new_selected_unit
 			print("Selected "+selected_unit.name)
-			Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)
+			Navigation.instance.highlight_tiles_in_range(selected_unit, 0, selected_unit.move_range)
 			Events.unit_clicked.emit(selected_unit)
 		else:
 			$UI/ShopMenu.visible = false
@@ -100,7 +101,7 @@ func back_button_pressed(btn_idx: int):
 	if ActionMenu.instance.get_item_text(btn_idx) != "Back":
 		return
 	Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
-	Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)
+	Navigation.instance.highlight_tiles_in_range(selected_unit, 0, selected_unit.move_range)
 	middle_of_move = false
 
 func capture_button_pressed(btn_idx):
@@ -117,6 +118,10 @@ func attack_button_pressed(btn_idx):
 		return
 	print("pressed attack")
 	is_attacking = not is_attacking #enable/disable
+	if is_attacking:
+		Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.min_attack_range, selected_unit.max_attack_range, true)
+	else:
+		Navigation.instance.unhighlight_tiles()
 
 func end_turn():
 	#if is_player_turn:

@@ -86,10 +86,10 @@ static func get_units_in_attack_range(center: Unit):
 	#and then call attacking function from combat.gd and end unit's turn
 	#also make sure to make the checking for opponents function here and call in selection.gd under the capture stuff
 
-func highlight_tiles_in_range(center: Unit, distance: int):
+func highlight_tiles_in_range(center: Unit, min_distance: int, max_distance: int, allow_solid_destination := false):
 	var condition = func(x: int, y: int) -> bool:
-		var pathlength := pathfind(center, Vector2i(x,y)).size()
-		return pathlength > 0 and pathlength <= distance + 1
+		var pathlength := pathfind(center, Vector2i(x,y), allow_solid_destination).size()
+		return pathlength >= min_distance + 1 and pathlength <= max_distance + 1
 		
 	highlight_tiles(condition)
 
