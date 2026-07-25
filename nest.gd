@@ -1,4 +1,7 @@
+class_name Nest
 extends Node2D
+
+@export var Team := Combat.Team.NEUTRAL
 
 @export var X = 0
 @export var Y = 0
@@ -15,6 +18,13 @@ func _ready() -> void:
 	position.x = X * Navigation.tile_size
 	position.y = Y * Navigation.tile_size
 	#Navigation.grid[X][Y] = self
-	#Navigation.units.append(self)
+	Navigation.nests.append(self)
 	
 	$HP_Bar/ProgressBar.value = HP
+
+func attack_nest(attacker: Unit):
+	HP -= 50
+	
+	if HP <= 0:
+		HP = 100
+		Team = attacker.Team

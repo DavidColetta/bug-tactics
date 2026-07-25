@@ -1,7 +1,7 @@
 class_name Unit
 extends Node2D
 
-@export var is_player_team := true
+@export var Team := Combat.Team.PLAYER
 
 # position (please move unit by calling MoveUnit in Navigation)
 @export var X = 0:
@@ -26,6 +26,10 @@ extends Node2D
 
 @export var move_range = 4
 
+@export var min_attack_range = 1
+
+@export var max_attack_range = 1
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
@@ -45,6 +49,7 @@ func _on_position_updated() -> void:
 	position.x = X * Navigation.tile_size
 	position.y = Y * Navigation.tile_size
 	
+	#should get rid of this after testing
 	if Navigation.instance and Selection.selected_unit == self:
 		Navigation.instance.highlight_tiles_in_range(get_pos(), move_range)
 

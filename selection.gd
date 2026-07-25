@@ -2,8 +2,12 @@ class_name Selection
 extends Node
 
 static var selected_unit: Unit
-
+static var prev_position: Vector2i
 static var is_player_turn := true
+
+func back_button_pressed(btn_idx: int):
+	if btn_idx == 1:
+		Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -17,8 +21,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		var obstacles_cell_coords = $Navigation.obstacles_tilemap.local_to_map(obstacles_local_pos)
 		
 		var new_selected_unit = Navigation.getUnitAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
-		if cell_highlighted and selected_unit.is_player_team:
+		if cell_highlighted and selected_unit.Team == Combat.Team.PLAYER:
 			print("Selected highlighted cell")
+			prev_position = selected_unit.get_pos()
 			selected_unit.move_to(highlights_cell_coords)
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
@@ -36,3 +41,22 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
+	$UI/ActionMenu.item_selected.connect(back_button_pressed)
+
+func end_turn():
+	if is_player_turn:
+		for nest in Navigation.nests:
+			if nest.Team != Combat.Team.PLAYER:
+				for unit in Navigation.units:
+					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
+						nest.attack_nest(unit)
+	else:
+		for nest in Navigation.nests:
+			if nest.Team != Combat.Team.ENEMY:
+				for unit in Navigation.units:
+					if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
+						nest.attack_nest(unit)
+	
+	is_player_turn = !is_player_turn
+	
+	
