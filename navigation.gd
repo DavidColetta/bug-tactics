@@ -1,7 +1,7 @@
 class_name Navigation
 extends Node
 
-static var instance := self
+static var instance : Navigation
 
 static var tile_size := 32
 
@@ -22,8 +22,8 @@ static var nests: Array[Nest]
 
 # call this function to move a unit around
 static func moveUnit(X, Y, toX, toY) -> void:
-	if grid[toX][toY] != null:
-		return
+	#if grid[toX][toY] != null:
+		#return
 	var unit := grid[X][Y] as Unit
 	if not unit:
 		return

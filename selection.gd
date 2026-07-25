@@ -3,14 +3,18 @@ extends Node
 
 static var selected_unit: Unit
 static var prev_position: Vector2i
+static var middle_of_move := false
 static var is_player_turn := true
 
 func back_button_pressed(btn_idx: int):
 	if btn_idx == 1:
 		Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
+		middle_of_move = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if middle_of_move: # if you're already moving a unit, you can't select a new one
+			return
 		# clicking on a highlighted tile should take precedence over clicking on a unit
 		var highlights_local_pos = $Navigation.highlights_tilemap.get_local_mouse_position()
 		var highlights_cell_coords = $Navigation.highlights_tilemap.local_to_map(highlights_local_pos)
@@ -25,6 +29,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			print("Selected highlighted cell")
 			prev_position = selected_unit.get_pos()
 			selected_unit.move_to(highlights_cell_coords)
+			middle_of_move = true
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
 			$UI/ActionMenu.visible = true
