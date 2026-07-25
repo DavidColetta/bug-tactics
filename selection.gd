@@ -3,18 +3,26 @@ extends Node
 
 static var selected_unit: Unit
 static var prev_position: Vector2i
-static var middle_of_move := false
+static var middle_of_move := false:
+	set(mid):
+		middle_of_move = mid
+		if middle_of_move:
+			EndTurn.instance.disabled = true
+		else:
+			EndTurn.instance.disabled = false
 static var is_player_turn := true
 
 func back_button_pressed(btn_idx: int):
 	if ActionMenu.instance.get_item_text(btn_idx) == "Back":
 		Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
+		Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)
 		middle_of_move = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if middle_of_move: # if you're already moving a unit, you can't select a new one
 			return
+		
 		# clicking on a highlighted tile should take precedence over clicking on a unit
 		var highlights_local_pos = $Navigation.highlights_tilemap.get_local_mouse_position()
 		var highlights_cell_coords = $Navigation.highlights_tilemap.local_to_map(highlights_local_pos)
@@ -25,13 +33,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		var obstacles_cell_coords = $Navigation.obstacles_tilemap.local_to_map(obstacles_local_pos)
 		
 		var new_selected_unit = Navigation.getUnitAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
-		if cell_highlighted and selected_unit.Team == Combat.Team.PLAYER:
+		if cell_highlighted and selected_unit.Team == Combat.Team.PLAYER and is_player_turn:
 			print("Selected highlighted cell")
 			prev_position = selected_unit.get_pos()
 			selected_unit.move_to(highlights_cell_coords)
 			middle_of_move = true
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
+			if can_claim_nest(): #enable Claim action
+				pass
+				#$UI/ActionMenu
 			#check if on top of a nest that isnt on player's team
 			#check if any enemies in attack range
 			$UI/ActionMenu.visible = true
@@ -50,6 +61,15 @@ func _ready() -> void:
 	selected_unit = null
 	$UI/ActionMenu.item_selected.connect(back_button_pressed)
 
+func can_claim_nest():
+	for nest in Navigation.nests:
+		if selected_unit.get_pos() == nest.get_pos() and selected_unit.Team != nest.Team:
+			return true
+	return false
+
+func can_attack():
+	pass
+
 func end_turn():
 	#if is_player_turn:
 		#for nest in Navigation.nests:
@@ -63,7 +83,7 @@ func end_turn():
 				#for unit in Navigation.units:
 					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
 						#nest.attack_nest(unit)
-	
+	Navigation.instance.unhighlight_tiles()
 	is_player_turn = !is_player_turn
 	
 	

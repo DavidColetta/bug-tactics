@@ -28,3 +28,5 @@ func attack_nest(attacker: Unit):
 	if HP <= 0:
 		HP = 100
 		Team = attacker.Team
+	
+	attacker.finished_move()
