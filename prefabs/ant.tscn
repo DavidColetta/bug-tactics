@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://6xcatlhfyme5"]
+
+[ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_5tacl"]
+[ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_q4ieg"]
+
+[node name="Unit" type="Node2D" unique_id=1213522776]
+script = ExtResource("1_5tacl")
+X = 1
+Y = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_q4ieg")
+centered = false
+
+[node name="HP_Bar" type="Control" parent="." unique_id=232757828]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HP_Bar" unique_id=1510497702]
+layout_mode = 0
+offset_right = 35.0
+offset_bottom = 7.875
+step = 1.0
+value = 76.0
+show_percentage = false
