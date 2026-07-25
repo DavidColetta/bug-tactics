@@ -6,7 +6,7 @@ static var prev_position: Vector2i
 static var is_player_turn := true
 
 func back_button_pressed(btn_idx: int):
-	if btn_idx == 1:
+	if ActionMenu.instance.get_item_text(btn_idx) == "Back":
 		Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -27,6 +27,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			selected_unit.move_to(highlights_cell_coords)
 			Navigation.instance.unhighlight_tiles()
 			await Events.move_animation_ended
+			#check if on top of a nest that isnt on player's team
+			#check if any enemies in attack range
 			$UI/ActionMenu.visible = true
 		elif new_selected_unit and not new_selected_unit.moved:
 			selected_unit = new_selected_unit

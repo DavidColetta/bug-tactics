@@ -56,7 +56,7 @@ func _on_position_updated() -> void:
 		Navigation.instance.highlight_tiles_in_range(self, move_range)
 
 func finished_move(btn_idx: int):
-	if btn_idx == 2:
+	if ActionMenu.instance.get_item_text(btn_idx) == "Wait":
 		moved = true
 
 func _ready() -> void:

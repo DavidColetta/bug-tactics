@@ -40,12 +40,13 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -76.0
-offset_bottom = 91.0
+offset_bottom = 120.0
 grow_horizontal = 0
-item_count = 3
+item_count = 4
 item_0/text = "Attack"
-item_1/text = "Back"
-item_2/text = "Wait"
+item_1/text = "Capture"
+item_2/text = "Back"
+item_3/text = "Wait"
 script = ExtResource("11_gd4vy")
 
 [node name="Navigation" type="Node" parent="." unique_id=817281527 node_paths=PackedStringArray("obstacles_tilemap", "highlights_tilemap", "visual_path_line2d")]
