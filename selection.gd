@@ -20,6 +20,9 @@ static var player_pennies = 0:
 		player_pennies = new_value
 		UI.instance.get_node("PenniesLabel").text = "$%.2f" % (player_pennies/100.0)
 
+static var MENU_OFFSET_X = 50
+static var MENU_OFFSET_Y = 0
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if middle_of_move and not is_attacking: # if you're already moving a unit, you can't select a new one
@@ -59,15 +62,21 @@ func _unhandled_input(event: InputEvent) -> void:
 				await Events.move_animation_ended
 			
 			if new_selected_nest and new_selected_nest.Team != selected_unit.Team:
-				set_actionmenu_btn_disabled("Capture", false)
+				#set_actionmenu_btn_disabled("Capture", false)
+				ActionMenu.capture_btn.disabled = false
 			else:
-				set_actionmenu_btn_disabled("Capture", true)
+				#set_actionmenu_btn_disabled("Capture", true)
+				ActionMenu.capture_btn.disabled = true
 			
 			if Navigation.get_units_in_attack_range(selected_unit).size() > 0:
-				set_actionmenu_btn_disabled("Attack", false)
+				#set_actionmenu_btn_disabled("Attack", false)
+				ActionMenu.attack_btn.disabled = false
 			else:
-				set_actionmenu_btn_disabled("Attack", true)
+				#set_actionmenu_btn_disabled("Attack", true)
+				ActionMenu.attack_btn.disabled = true
 			
+			ActionMenu.instance.position.x = selected_unit.position.x + MENU_OFFSET_X
+			ActionMenu.instance.position.y = selected_unit.position.y + MENU_OFFSET_Y
 			ActionMenu.instance.visible = true
 		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER and not new_selected_unit:
 			Navigation.instance.unhighlight_tiles()
@@ -93,43 +102,39 @@ func _ready() -> void:
 	selected_unit = null
 	selected_nest = null
 	player_pennies = 50
-	ActionMenu.instance.item_selected.connect(attack_button_pressed)
-	ActionMenu.instance.item_selected.connect(capture_button_pressed)
-	ActionMenu.instance.item_selected.connect(back_button_pressed)
-	ActionMenu.instance.item_selected.connect(wait_button_pressed)
+	#ActionMenu.instance.item_selected.connect(attack_button_pressed)
+	#ActionMenu.instance.item_selected.connect(capture_button_pressed)
+	#ActionMenu.instance.item_selected.connect(back_button_pressed)
+	#ActionMenu.instance.item_selected.connect(wait_button_pressed)
+	ActionMenu.attack_btn.pressed.connect(attack_button_pressed)
+	ActionMenu.capture_btn.pressed.connect(capture_button_pressed)
+	ActionMenu.back_btn.pressed.connect(back_button_pressed)
+	ActionMenu.wait_btn.pressed.connect(wait_button_pressed)
 
-func set_actionmenu_btn_disabled(option, disabled):
-	for i in ActionMenu.instance.item_count:
-		if ActionMenu.instance.get_item_text(i) == option:
-			ActionMenu.instance.set_item_disabled(i, disabled)
-			break
+#func set_actionmenu_btn_disabled(option, disabled):
+	#for i in ActionMenu.instance.item_count:
+		#if ActionMenu.instance.get_item_text(i) == option:
+			#ActionMenu.instance.set_item_disabled(i, disabled)
+			#break
 
-func wait_button_pressed(btn_idx):
-	if ActionMenu.instance.get_item_text(btn_idx) != "Wait":
-		return
+func wait_button_pressed():
 	print("wait pressed")
 	selected_unit.finished_move()
 
-func back_button_pressed(btn_idx: int):
-	if ActionMenu.instance.get_item_text(btn_idx) != "Back":
-		return
+func back_button_pressed():
 	print("back pressed")
 	Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
 	Navigation.instance.highlight_tiles_in_range(selected_unit, 0, selected_unit.move_range)
 	middle_of_move = false
 
-func capture_button_pressed(btn_idx):
-	if ActionMenu.instance.get_item_text(btn_idx) != "Capture":
-		return
+func capture_button_pressed():
 	print("capture pressed")
 	var unit_pos = selected_unit.get_pos()
 	var nest = Navigation.getNestAtPosition(unit_pos.x, unit_pos.y)
 	nest.attack_nest(selected_unit)
 	selected_unit.finished_move()
 
-func attack_button_pressed(btn_idx):
-	if ActionMenu.instance.get_item_text(btn_idx) != "Attack":
-		return
+func attack_button_pressed():
 	print("attack pressed")
 	is_attacking = true
 	Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.min_attack_range, selected_unit.max_attack_range, true)

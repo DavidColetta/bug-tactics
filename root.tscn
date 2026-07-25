@@ -54,20 +54,6 @@ offset_bottom = 514.0
 text = "End Turn"
 script = ExtResource("4_qw60f")
 
-[node name="ActionMenu" type="ItemList" parent="UI" unique_id=771361282]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 122.0
-grow_horizontal = 0
-item_count = 4
-item_0/text = "Attack"
-item_1/text = "Capture"
-item_2/text = "Back"
-item_3/text = "Wait"
-script = ExtResource("11_gd4vy")
-
 [node name="ShopMenu" type="ItemList" parent="UI" unique_id=51924746]
 offset_left = 882.0
 offset_top = 138.0
@@ -93,15 +79,14 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "$1.11"
 
-[node name="ActionMenu2" type="TextureRect" parent="UI" unique_id=2023119201]
-offset_left = 501.0
-offset_top = 106.0
-offset_right = 634.0
-offset_bottom = 246.0
+[node name="ActionMenu" type="TextureRect" parent="UI" unique_id=2023119201]
+offset_right = 133.0
+offset_bottom = 140.0
 texture = ExtResource("9_qwhpj")
 expand_mode = 1
+script = ExtResource("11_gd4vy")
 
-[node name="ButtonContainer" type="VBoxContainer" parent="UI/ActionMenu2" unique_id=417852997]
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/ActionMenu" unique_id=417852997]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,28 +94,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Attack" type="Button" parent="UI/ActionMenu2/ButtonContainer" unique_id=2095912481]
+[node name="Attack" type="Button" parent="UI/ActionMenu/ButtonContainer" unique_id=2095912481]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Attack"
 flat = true
 
-[node name="Capture" type="Button" parent="UI/ActionMenu2/ButtonContainer" unique_id=501312118]
+[node name="Capture" type="Button" parent="UI/ActionMenu/ButtonContainer" unique_id=501312118]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Capture"
 flat = true
 
-[node name="Back" type="Button" parent="UI/ActionMenu2/ButtonContainer" unique_id=1919609053]
+[node name="Back" type="Button" parent="UI/ActionMenu/ButtonContainer" unique_id=1919609053]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Back"
 flat = true
 
-[node name="Wait" type="Button" parent="UI/ActionMenu2/ButtonContainer" unique_id=569516580]
+[node name="Wait" type="Button" parent="UI/ActionMenu/ButtonContainer" unique_id=569516580]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -241,5 +226,8 @@ default_color = Color(0, 0, 0, 1)
 script = ExtResource("14_qwhpj")
 
 [connection signal="button_down" from="UI/EndTurnButton" to="." method="end_turn"]
-[connection signal="item_selected" from="UI/ActionMenu" to="UI" method="_on_action_menu_item_selected"]
 [connection signal="item_selected" from="UI/ShopMenu" to="UI/ShopMenu" method="_on_shop_menu_item_selected"]
+[connection signal="pressed" from="UI/ActionMenu/ButtonContainer/Attack" to="UI" method="_on_action_menu_button_pressed"]
+[connection signal="pressed" from="UI/ActionMenu/ButtonContainer/Capture" to="UI" method="_on_action_menu_button_pressed"]
+[connection signal="pressed" from="UI/ActionMenu/ButtonContainer/Back" to="UI" method="_on_action_menu_button_pressed"]
+[connection signal="pressed" from="UI/ActionMenu/ButtonContainer/Wait" to="UI" method="_on_action_menu_button_pressed"]
