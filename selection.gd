@@ -135,19 +135,28 @@ func attack_button_pressed(btn_idx):
 	Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.min_attack_range, selected_unit.max_attack_range, true)
 
 func end_turn():
-	#if is_player_turn:
+	if is_player_turn:
+		EndTurn.instance.disabled = true
+		Navigation.instance.unhighlight_tiles()
+		is_player_turn = false
+		$AI.run_ai()
+		
 		#for nest in Navigation.nests:
 			#if nest.Team != Combat.Team.PLAYER:
 				#for unit in Navigation.units:
 					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
 						#nest.attack_nest(unit)
-	#else:
+	else:
+		print("not player turn, cant end turn")
 		#for nest in Navigation.nests:
 			#if nest.Team != Combat.Team.ENEMY:
 				#for unit in Navigation.units:
 					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.ENEMY:
 						#nest.attack_nest(unit)
-	Navigation.instance.unhighlight_tiles()
-	is_player_turn = !is_player_turn
+	
+static func end_ai_turn():
+	print("Ai is done")
+	is_player_turn = true
+	EndTurn.instance.disabled = false
 	
 	

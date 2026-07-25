@@ -29,4 +29,5 @@ func attack_nest(attacker: Unit):
 		HP = 100
 		Team = attacker.Team
 	
+	print("nest attacked")
 	attacker.finished_move()

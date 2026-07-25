@@ -106,7 +106,7 @@ func unhighlight_tiles():
 	highlights_tilemap.clear()
 
 func get_pathfinding_distance(subject: Unit, target: Vector2i) -> int:
-	return pathfind(subject, target, true).size()
+	return pathfind(subject, target, true).size() - 1
 
 func pathfind(subject: Unit, target: Vector2i, allow_solid_destination := false) -> PackedVector2Array:
 	var pathfinding_grid : AStarGrid2D = AStarGrid2D.new()
