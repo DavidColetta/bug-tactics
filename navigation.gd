@@ -38,6 +38,12 @@ static func getUnitAtPosition(X, Y) -> Unit:
 	else:
 		return null
 
+static func getNestAtPosition(X, Y) -> Nest:
+	for nest in nests:
+		if nest.get_pos() == Vector2i(X, Y):
+			return nest
+	return null
+
 func highlight_tiles_in_range(center: Unit, distance: int):
 	var condition = func(x: int, y: int) -> bool:
 		var pathlength := pathfind(center, Vector2i(x,y)).size()

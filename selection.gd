@@ -6,6 +6,8 @@ static var prev_position: Vector2i
 static var middle_of_move := false
 static var is_player_turn := true
 
+static var selected_nest: Nest
+
 func back_button_pressed(btn_idx: int):
 	if ActionMenu.instance.get_item_text(btn_idx) == "Back":
 		Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
@@ -25,6 +27,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var obstacles_cell_coords = $Navigation.obstacles_tilemap.local_to_map(obstacles_local_pos)
 		
 		var new_selected_unit = Navigation.getUnitAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
+		var new_selected_nest = Navigation.getNestAtPosition(obstacles_cell_coords.x, obstacles_cell_coords.y)
 		if cell_highlighted and selected_unit.Team == Combat.Team.PLAYER:
 			print("Selected highlighted cell")
 			prev_position = selected_unit.get_pos()
@@ -35,12 +38,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			#check if on top of a nest that isnt on player's team
 			#check if any enemies in attack range
 			$UI/ActionMenu.visible = true
+		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER:
+			selected_unit = null
+			selected_nest = new_selected_nest
+			print("Selected Nest "+selected_nest.name)
+			$UI/ShopMenu.visible = true
 		elif new_selected_unit and not new_selected_unit.moved:
+			selected_nest = null
+			$UI/ShopMenu.visible = false
 			selected_unit = new_selected_unit
 			print("Selected "+selected_unit.name)
 			Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.move_range)
 			Events.unit_clicked.emit(selected_unit)
 		else:
+			$UI/ShopMenu.visible = false
 			print("Selected empty")
 			Navigation.instance.unhighlight_tiles()
 			Events.empty_clicked.emit()
@@ -48,6 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
+	selected_nest = null
 	$UI/ActionMenu.item_selected.connect(back_button_pressed)
 
 func end_turn():
