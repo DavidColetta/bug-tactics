@@ -55,6 +55,7 @@ func finished_move():
 	moved = true
 	Selection.middle_of_move = false
 	Selection.is_attacking = false
+	UI.instance.hide_ui()
 
 func _ready() -> void:
 	_on_position_updated()
