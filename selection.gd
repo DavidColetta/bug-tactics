@@ -15,6 +15,10 @@ static var middle_of_move := false:
 static var is_player_turn := true
 static var is_attacking := false
 static var selected_nest: Nest
+static var player_pennies = 0:
+	set(new_value):
+		player_pennies = new_value
+		UI.instance.get_node("PenniesLabel").text = "¢%.2f" % (player_pennies/100.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -66,6 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			ActionMenu.instance.visible = true
 		elif new_selected_nest and new_selected_nest.Team == Combat.Team.PLAYER and not new_selected_unit:
+			Navigation.instance.unhighlight_tiles()
 			selected_unit = null
 			selected_nest = new_selected_nest
 			print("Selected Nest "+selected_nest.name)
@@ -87,6 +92,7 @@ func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
 	selected_nest = null
+	player_pennies = 50
 	ActionMenu.instance.item_selected.connect(attack_button_pressed)
 	ActionMenu.instance.item_selected.connect(capture_button_pressed)
 	ActionMenu.instance.item_selected.connect(back_button_pressed)

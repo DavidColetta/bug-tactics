@@ -1,6 +1,10 @@
 extends CanvasLayer
+class_name UI
+
+static var instance := self
 
 func _ready() -> void:
+	instance = self
 	$UnitInfo.visible = false
 	$ActionMenu.visible = false
 	$ShopMenu.visible = false
