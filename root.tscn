@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d2605gin6em5c" path="res://paper_bg.jpg" id="9_qwhpj"]
 [ext_resource type="FontFile" uid="uid://dylhsasgrhxym" path="res://fonts/vtks-easy-way/VTKS EASY WAY.ttf" id="10_sq7yr"]
 [ext_resource type="Script" uid="uid://dtd0rv2dnqf83" path="res://ui/action_menu.gd" id="11_gd4vy"]
+[ext_resource type="FontFile" uid="uid://drwnnak4o7vxn" path="res://fonts/barrio/Barrio-Regular.otf" id="11_r3r3k"]
 [ext_resource type="PackedScene" uid="uid://6xcatlhfyme5" path="res://prefabs/ant.tscn" id="12_qwhpj"]
 [ext_resource type="Script" uid="uid://dr0kqn6p3cwmt" path="res://ai.gd" id="14_qwhpj"]
 
@@ -38,14 +39,6 @@ script = ExtResource("1_l8v81")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=380945793]
 script = ExtResource("7_bf3um")
-
-[node name="UnitInfo" type="Label" parent="UI" unique_id=1021289715]
-offset_left = 40.0
-offset_top = 482.0
-offset_right = 237.0
-offset_bottom = 582.0
-text = "UnitInfo"
-script = ExtResource("7_vyht1")
 
 [node name="EndTurnButton" type="Button" parent="UI" unique_id=1748051883]
 offset_left = 971.0
@@ -81,6 +74,7 @@ grow_vertical = 0
 text = "$1.11"
 
 [node name="ActionMenu" type="TextureRect" parent="UI" unique_id=2023119201]
+visible = false
 offset_right = 140.0
 offset_bottom = 173.0
 texture = ExtResource("9_qwhpj")
@@ -128,6 +122,40 @@ theme_override_font_sizes/font_size = 24
 text = "Wait"
 flat = true
 
+[node name="UnitInfo" type="TextureRect" parent="UI" unique_id=1483691135]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -115.0
+offset_right = 283.0
+offset_bottom = -6.0
+grow_vertical = 0
+texture = ExtResource("9_qwhpj")
+expand_mode = 1
+script = ExtResource("7_vyht1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UnitInfo" unique_id=1013834907]
+layout_mode = 0
+offset_bottom = 109.0
+
+[node name="UnitType" type="Label" parent="UI/UnitInfo/VBoxContainer" unique_id=952200251]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_r3r3k")
+theme_override_font_sizes/font_size = 20
+
+[node name="MoveRange" type="Label" parent="UI/UnitInfo/VBoxContainer" unique_id=710486727]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_r3r3k")
+theme_override_font_sizes/font_size = 20
+
+[node name="AttackRange" type="Label" parent="UI/UnitInfo/VBoxContainer" unique_id=1481623968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_r3r3k")
+theme_override_font_sizes/font_size = 20
+
 [node name="Navigation" type="Node" parent="." unique_id=817281527 node_paths=PackedStringArray("obstacles_tilemap", "highlights_tilemap", "visual_path_line2d")]
 script = ExtResource("3_vvh5c")
 obstacles_tilemap = NodePath("../Environment/TileMapLayer")
@@ -144,6 +172,7 @@ self_modulate = Color(0.5176471, 0.7764706, 0.4117647, 1)
 scale = Vector2(1149, 646)
 texture = ExtResource("1_pyidc")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment" unique_id=1987919541]
 scale = Vector2(2, 2)
