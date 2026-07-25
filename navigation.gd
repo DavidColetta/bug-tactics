@@ -44,7 +44,7 @@ static func getNestAtPosition(X, Y) -> Nest:
 			return nest
 	return null
 
-func get_units_in_attack_range(center: Unit):
+static func get_units_in_attack_range(center: Unit):
 	var can_attack = func(unit: Unit) -> bool:
 		return unit != null and unit.Team != center.Team
 	var attackable: Array[Unit] = []
