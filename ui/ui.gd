@@ -3,6 +3,7 @@ extends CanvasLayer
 func _ready() -> void:
 	$UnitInfo.visible = false
 	$ActionMenu.visible = false
+	$ShopMenu.visible = false
 	Events.unit_clicked.connect(show_ui)
 	Events.empty_clicked.connect(hide_ui)
 	

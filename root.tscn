@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bawkaft406r55" path="res://ui/end_turn_button.gd" id="4_qw60f"]
 [ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://c2jh05lgh55f1" path="res://nest.gd" id="6_bf3um"]
+[ext_resource type="Script" uid="uid://wfmnqk6bsd64" path="res://shop_menu.gd" id="6_eji0w"]
 [ext_resource type="Script" uid="uid://ckh7sdjn55xb4" path="res://ui/ui.gd" id="7_bf3um"]
 [ext_resource type="Script" uid="uid://cjc0ptgrsth1f" path="res://ui/unit_info.gd" id="7_vyht1"]
 [ext_resource type="Script" uid="uid://dtd0rv2dnqf83" path="res://ui/action_menu.gd" id="11_gd4vy"]
@@ -49,6 +50,17 @@ item_2/text = "Back"
 item_3/text = "Wait"
 script = ExtResource("11_gd4vy")
 
+[node name="ShopMenu" type="ItemList" parent="UI" unique_id=51924746]
+offset_left = 969.0
+offset_top = 138.0
+offset_right = 1121.0
+offset_bottom = 457.0
+item_count = 3
+item_0/text = "Ant (Infantry)"
+item_1/text = "Cricket (Recon)"
+item_2/text = "Spider (Anti-Air)"
+script = ExtResource("6_eji0w")
+
 [node name="Navigation" type="Node" parent="." unique_id=817281527 node_paths=PackedStringArray("obstacles_tilemap", "highlights_tilemap", "visual_path_line2d")]
 script = ExtResource("3_vvh5c")
 obstacles_tilemap = NodePath("../Environment/TileMapLayer")
@@ -68,7 +80,7 @@ centered = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment" unique_id=1987919541]
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAQAAAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAACAAEAAAADAAMAAAAAAAQAAAAEAAUAAAAFAAMAAAAFAAYAAAA=")
+tile_map_data = PackedByteArray("AAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAACAAEAAAADAAMAAAAAAAQAAAAEAAUAAAAFAAMAAAAFAAYAAAAAAAAAAAAAAAQAAAA=")
 tile_set = ExtResource("1_pq8q7")
 
 [node name="HighlightLayer" type="TileMapLayer" parent="Environment" unique_id=172361445]
@@ -81,6 +93,7 @@ tile_set = ExtResource("1_pq8q7")
 [node name="PlayerHome" type="Node2D" parent="Nests" unique_id=887353117]
 position = Vector2(100.34, 0)
 script = ExtResource("6_bf3um")
+Team = 0
 X = 6
 Y = 4
 
@@ -97,6 +110,34 @@ offset_right = 31.660004
 offset_bottom = 40.0
 
 [node name="ProgressBar" type="ProgressBar" parent="Nests/PlayerHome/HP_Bar" unique_id=1629689246]
+layout_mode = 0
+offset_left = -1.3399963
+offset_top = -31.0
+offset_right = 31.320007
+offset_bottom = -23.651499
+step = 1.0
+value = 76.0
+show_percentage = false
+
+[node name="NeutralNest" type="Node2D" parent="Nests" unique_id=1447908441]
+position = Vector2(100.34, 0)
+script = ExtResource("6_bf3um")
+X = 8
+Y = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="Nests/NeutralNest" unique_id=481714096]
+scale = Vector2(32, 32)
+texture = ExtResource("1_pyidc")
+centered = false
+
+[node name="HP_Bar" type="Control" parent="Nests/NeutralNest" unique_id=1552918117]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 31.660004
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Nests/NeutralNest/HP_Bar" unique_id=377350594]
 layout_mode = 0
 offset_left = -1.3399963
 offset_top = -31.0
