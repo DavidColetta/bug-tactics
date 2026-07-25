@@ -76,6 +76,7 @@ func _ready() -> void:
 	selected_unit = null
 	selected_nest = null
 	ActionMenu.instance.item_selected.connect(back_button_pressed)
+	ActionMenu.instance.item_selected.connect(capture_button_pressed)
 
 func set_capture_btn_disabled(disabled):
 	for i in ActionMenu.instance.item_count:
@@ -85,6 +86,15 @@ func set_capture_btn_disabled(disabled):
 
 func can_attack():
 	pass
+
+func capture_button_pressed(btn_idx):
+	if ActionMenu.instance.get_item_text(btn_idx) != "Capture":
+		return
+	print("capturing nest")
+	var unit_pos = selected_unit.get_pos()
+	var nest = Navigation.getNestAtPosition(unit_pos.x, unit_pos.y)
+	nest.attack_nest(selected_unit)
+	selected_unit.finished_move()
 
 func end_turn():
 	#if is_player_turn:
