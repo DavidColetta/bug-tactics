@@ -87,9 +87,10 @@ func _ready() -> void:
 	is_player_turn = true
 	selected_unit = null
 	selected_nest = null
-	ActionMenu.instance.item_selected.connect(back_button_pressed)
-	ActionMenu.instance.item_selected.connect(capture_button_pressed)
 	ActionMenu.instance.item_selected.connect(attack_button_pressed)
+	ActionMenu.instance.item_selected.connect(capture_button_pressed)
+	ActionMenu.instance.item_selected.connect(back_button_pressed)
+	ActionMenu.instance.item_selected.connect(wait_button_pressed)
 
 func set_actionmenu_btn_disabled(option, disabled):
 	for i in ActionMenu.instance.item_count:
@@ -97,9 +98,16 @@ func set_actionmenu_btn_disabled(option, disabled):
 			ActionMenu.instance.set_item_disabled(i, disabled)
 			break
 
+func wait_button_pressed(btn_idx):
+	if ActionMenu.instance.get_item_text(btn_idx) != "Wait":
+		return
+	print("wait pressed")
+	selected_unit.finished_move()
+
 func back_button_pressed(btn_idx: int):
 	if ActionMenu.instance.get_item_text(btn_idx) != "Back":
 		return
+	print("back pressed")
 	Navigation.moveUnit(selected_unit.X, selected_unit.Y, prev_position.x, prev_position.y)
 	Navigation.instance.highlight_tiles_in_range(selected_unit, 0, selected_unit.move_range)
 	middle_of_move = false
@@ -107,7 +115,7 @@ func back_button_pressed(btn_idx: int):
 func capture_button_pressed(btn_idx):
 	if ActionMenu.instance.get_item_text(btn_idx) != "Capture":
 		return
-	print("capturing nest")
+	print("capture pressed")
 	var unit_pos = selected_unit.get_pos()
 	var nest = Navigation.getNestAtPosition(unit_pos.x, unit_pos.y)
 	nest.attack_nest(selected_unit)
@@ -116,12 +124,9 @@ func capture_button_pressed(btn_idx):
 func attack_button_pressed(btn_idx):
 	if ActionMenu.instance.get_item_text(btn_idx) != "Attack":
 		return
-	print("pressed attack")
-	is_attacking = not is_attacking #enable/disable
-	if is_attacking:
-		Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.min_attack_range, selected_unit.max_attack_range, true)
-	else:
-		Navigation.instance.unhighlight_tiles()
+	print("attack pressed")
+	is_attacking = true
+	Navigation.instance.highlight_tiles_in_range(selected_unit, selected_unit.min_attack_range, selected_unit.max_attack_range, true)
 
 func end_turn():
 	#if is_player_turn:

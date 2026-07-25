@@ -51,12 +51,10 @@ func _on_position_updated() -> void:
 	position.x = X * Navigation.tile_size
 	position.y = Y * Navigation.tile_size
 
-#using -1 for when calling function directly instead of through signal emission
-func finished_move(btn_idx: int = -1):
-	if btn_idx == -1 or ActionMenu.instance.get_item_text(btn_idx) == "Wait":
-		moved = true
-		Selection.middle_of_move = false
-		Selection.is_attacking = false
+func finished_move():
+	moved = true
+	Selection.middle_of_move = false
+	Selection.is_attacking = false
 
 func _ready() -> void:
 	_on_position_updated()
@@ -64,8 +62,6 @@ func _ready() -> void:
 	Navigation.units.append(self)
 	
 	$HP_Bar/ProgressBar.value = HP
-	
-	ActionMenu.instance.item_selected.connect(finished_move)
 	
 	#example of pathfinding
 	#move_to(Vector2i(6,4))
