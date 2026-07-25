@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cjc0ptgrsth1f" path="res://ui/unit_info.gd" id="7_vyht1"]
 [ext_resource type="Script" uid="uid://dtd0rv2dnqf83" path="res://ui/action_menu.gd" id="11_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://6xcatlhfyme5" path="res://prefabs/ant.tscn" id="12_qwhpj"]
+[ext_resource type="Script" uid="uid://dr0kqn6p3cwmt" path="res://ai.gd" id="14_qwhpj"]
 
 [sub_resource type="Resource" id="Resource_qwhpj"]
 script = ExtResource("7_qt76e")
@@ -190,6 +191,9 @@ Y = 6
 [node name="Line2D" type="Line2D" parent="." unique_id=226289295]
 width = 4.0
 default_color = Color(0, 0, 0, 1)
+
+[node name="AI" type="Node" parent="." unique_id=637837545]
+script = ExtResource("14_qwhpj")
 
 [connection signal="button_down" from="UI/EndTurnButton" to="." method="end_turn"]
 [connection signal="item_selected" from="UI/ActionMenu" to="UI" method="_on_action_menu_item_selected"]
