@@ -146,11 +146,13 @@ func end_turn():
 		is_player_turn = false
 		$AI.run_ai()
 		
-		#for nest in Navigation.nests:
-			#if nest.Team != Combat.Team.PLAYER:
-				#for unit in Navigation.units:
-					#if unit.get_pos() == nest.get_pos() and unit.Team == Combat.Team.PLAYER:
-						#nest.attack_nest(unit)
+		for nest in Navigation.nests:
+			if nest.Team == Combat.Team.PLAYER:
+				player_pennies += 10
+		for unit in Navigation.units:
+			if unit.Team == Combat.Team.PLAYER:
+				unit.HP -= 20
+				
 	else:
 		print("not player turn, cant end turn")
 		#for nest in Navigation.nests:
