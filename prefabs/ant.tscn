@@ -2,6 +2,38 @@
 
 [ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_5tacl"]
 [ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_q4ieg"]
+[ext_resource type="Texture2D" uid="uid://bbng50kfk7fs6" path="res://Ant1.png" id="3_3p3ic"]
+[ext_resource type="Texture2D" uid="uid://xajkhxf5mqi5" path="res://Ant2.png" id="4_qxsoe"]
+[ext_resource type="Texture2D" uid="uid://bdmwsdwwx5hqr" path="res://Ant3.png" id="5_ofert"]
+[ext_resource type="Texture2D" uid="uid://b73vdmq3gcl7f" path="res://Ant4.png" id="6_h3ca6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qxsoe")
+}],
+"loop": 1,
+"name": &"IdleAnt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3p3ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qxsoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ofert")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h3ca6")
+}],
+"loop": 1,
+"name": &"WalkAnt",
+"speed": 5.0
+}]
 
 [node name="Unit" type="Node2D" unique_id=1213522776]
 script = ExtResource("1_5tacl")
@@ -9,6 +41,7 @@ X = 1
 Y = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_q4ieg")
 centered = false
@@ -27,3 +60,13 @@ offset_bottom = 7.875
 step = 1.0
 value = 76.0
 show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1442783930]
+position = Vector2(16, 15)
+rotation = -1.5707964
+scale = Vector2(1.9912667, 1.9912667)
+sprite_frames = SubResource("SpriteFrames_dklp6")
+animation = &"WalkAnt"
+autoplay = "IdleAnt"
+frame = 3
+frame_progress = 0.30029967

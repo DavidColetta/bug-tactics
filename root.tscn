@@ -34,6 +34,8 @@ script = ExtResource("7_qt76e")
 cost = 80
 metadata/_custom_type_script = "uid://bymyekdhhb35y"
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
+
 [node name="Node" type="Node" unique_id=1299204449]
 script = ExtResource("1_l8v81")
 
@@ -193,9 +195,10 @@ Team = 0
 X = 5
 Y = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1478742400]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Nests/PlayerHome" unique_id=1637653461]
 scale = Vector2(32, 32)
-texture = ExtResource("1_pyidc")
+sprite_frames = SubResource("SpriteFrames_dklp6")
+frame_progress = 0.5150241
 centered = false
 
 [node name="HP_Bar" type="Control" parent="Nests/PlayerHome" unique_id=1437980340]

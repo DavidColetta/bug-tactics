@@ -3,6 +3,8 @@ extends Node2D
 
 @export var Team := Combat.Team.PLAYER
 
+@onready var animated_sprite = $AnimatedSprite2D
+
 # position (please move unit by calling MoveUnit in Navigation)
 @export var X = 0:
 	set(new_value):
@@ -45,8 +47,33 @@ func move_to(target: Vector2i):
 	
 	for step in path: #wait briefly and then move to the next step on the path
 		await get_tree().create_timer(0.25).timeout
-		Navigation.moveUnit(X, Y, step.x/Navigation.tile_size, step.y/Navigation.tile_size)
-	
+		
+		# 1. Convert pixel step to grid coordinates
+		var next_x = int(step.x / Navigation.tile_size)
+		var next_y = int(step.y / Navigation.tile_size)
+		
+		# 2. Calculate direction from CURRENT grid position (X, Y)
+		var dir_x = next_x - X
+		var dir_y = next_y - Y
+		
+		if dir_x < 0:
+			animated_sprite.rotation_degrees = -90
+			print("right")
+		elif dir_x > 0:
+			animated_sprite.rotation_degrees = 90
+			print("left")
+		elif dir_y > 0:
+			animated_sprite.rotation_degrees = -180
+			print("down")
+		elif dir_y < 0:
+			animated_sprite.rotation_degrees = 0
+			print("up")
+		
+		# 4. Move the unit (this updates X and Y for the NEXT iteration)
+		Navigation.moveUnit(X, Y, next_x, next_y)
+		animated_sprite.play("WalkAnt")
+		
+	animated_sprite.play("IdleAnt")
 	Events.move_animation_ended.emit()
 
 func _on_position_updated() -> void:
