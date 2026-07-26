@@ -18,6 +18,10 @@ extends Node2D
 @export var HP = 100:
 	set(new_value):
 		HP = new_value
+		if not find_child("HP_Bar"):
+			return
+		if $HP_Bar/ProgressBar.max_value < HP:
+			$HP_Bar/ProgressBar.max_value = HP
 		$HP_Bar/ProgressBar.value = new_value
 		if HP <= 0:
 			die()
