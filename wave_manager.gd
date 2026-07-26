@@ -26,7 +26,7 @@ extends Node2D
 @export var max_y: int = 10
 
 
-func spawn_wave(amount: int = 2) -> void:
+func spawn_wave(amount: int = 1) -> void:
 	var spawned_count = 0
 	var max_attempts = 30 # prevents an infinite loop
 	var attempts = 0
@@ -41,6 +41,8 @@ func spawn_wave(amount: int = 2) -> void:
 		var enemy_scene = enemy_prefabs.pick_random()
 		var random_y = randi_range(min_y, max_y)
 		
+
+		
 		# 2. Check Y bounds as well to prevent index crashes on rows
 		if random_y >= Navigation.grid[spawn_column].size():
 			continue
@@ -52,6 +54,8 @@ func spawn_wave(amount: int = 2) -> void:
 			enemy.Team = Combat.Team.ENEMY
 			enemy.X = spawn_column
 			enemy.Y = random_y
+			
+			enemy.ifIWasBlueIDie(true)
 			
 			get_node("../Combatants").add_child(enemy)
 			

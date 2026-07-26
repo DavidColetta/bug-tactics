@@ -102,6 +102,12 @@ func _ready() -> void:
 	
 	#example of pathfinding
 	#move_to(Vector2i(6,4))
+	
+func ifIWasBlueIDie(enable: bool = true) -> void:
+	if enable:
+		modulate = Color(0.3, 0.5, 1.0, 0.6)
+	else:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func die() -> void:
 	if Team != Combat.Team.PLAYER:

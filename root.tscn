@@ -287,12 +287,6 @@ show_percentage = false
 position = Vector2(526.44995, 546.4272)
 DAMAGE_TO_TYPES = [50, 50, 25]
 
-[node name="EnemyUnit" parent="Combatants" unique_id=1759887071 instance=ExtResource("12_qwhpj")]
-Team = 1
-X = 16
-Y = 13
-DAMAGE_TO_TYPES = [50, 50, 25]
-
 [node name="Line2D" type="Line2D" parent="." unique_id=226289295]
 width = 4.0
 default_color = Color(0, 0, 0, 1)
