@@ -40,6 +40,8 @@ extends Node2D
 
 @export var moved = false
 
+@export var lifetime := 5
+
 func get_pos() -> Vector2i:
 	return Vector2i(X, Y)
 
