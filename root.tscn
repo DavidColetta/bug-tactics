@@ -34,8 +34,6 @@ script = ExtResource("7_qt76e")
 cost = 80
 metadata/_custom_type_script = "uid://bymyekdhhb35y"
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
-
 [node name="Node" type="Node" unique_id=1299204449]
 script = ExtResource("1_l8v81")
 
@@ -178,7 +176,7 @@ metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment" unique_id=1987919541]
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAABAAAAAAACAAQAAAABAAIAAAALAAQAAAAFAAQAAAAEAAYAAAABAAUAAAAFAAYAAAAFAAEAAAAFAAcAAAAXAAkAAAAGAAMAAAACAAEAAAADAAMAAAAAAAQAAAAEAAUAAAAFAAMAAAAFAAYAAAAAAAAAAAAAAAQAAAA=")
+tile_map_data = PackedByteArray("AAAXAAkAAAAGAAMAAAAJAAgAAAADAAIAAAAFAAkAAAADAAMAAAACAAgAAAADAAMAAAAGAAYAAAACAAMAAAAGAAUAAAACAAIAAAAIAAQAAAACAAEAAAAIAAMAAAACAAAAAAACAAsAAAAHAAMAAAABAAMAAAAHAAMAAAAKAAsAAAAGAAUAAAANAAQAAAAHAAMAAAAEAAIAAAAHAAMAAAADAAUAAAAGAAUAAAAPAA8AAAAGAAUAAAASAAsAAAAGAAUAAAATAAQAAAAGAAUAAAAFAA8AAAAFAAUAAAABAA0AAAAFAAUAAAAPAAgAAAAFAAUAAAARAAUAAAAFAAUAAAAMAAEAAAAFAAUAAAAMAAYAAAAFAAUAAAAVAA8AAAAFAAUAAAAKABIAAAAFAAUAAAAJAA8AAAAFAAUAAAAUAAcAAAAFAAUAAAAZAAIAAAAFAAUAAAAZABMAAAAFAAUAAAAHABMAAAAFAAUAAAAAAAAAAAAEAAIAAAAjAAAAAAAEAAIAAAAjABMAAAAFAAQAAAAAABMAAAAEAAUAAAA=")
 tile_set = ExtResource("1_pq8q7")
 
 [node name="HighlightLayer" type="TileMapLayer" parent="Environment" unique_id=172361445]
@@ -195,10 +193,9 @@ Team = 0
 X = 5
 Y = 5
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Nests/PlayerHome" unique_id=1637653461]
+[node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1920912820]
 scale = Vector2(32, 32)
-sprite_frames = SubResource("SpriteFrames_dklp6")
-frame_progress = 0.5150241
+texture = ExtResource("1_pyidc")
 centered = false
 
 [node name="HP_Bar" type="Control" parent="Nests/PlayerHome" unique_id=1437980340]
