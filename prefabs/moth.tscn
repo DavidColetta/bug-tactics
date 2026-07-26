@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_8k0fh"]
 [ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_ntvc6"]
-[ext_resource type="Texture2D" uid="uid://bmgqycaqwbwtb" path="res://Sprites/Stag-Beetle2.png" id="3_2ekeo"]
-[ext_resource type="Texture2D" uid="uid://86isv6xxadw8" path="res://Sprites/Stag-Beetle1.png" id="4_8krsk"]
-[ext_resource type="Texture2D" uid="uid://dejj4pxetonky" path="res://Sprites/Stag-Beetle3.png" id="5_y58gh"]
-[ext_resource type="Texture2D" uid="uid://cdo50uhm7fvdn" path="res://Sprites/Stag-Beetle4.png" id="6_0cksn"]
+[ext_resource type="Texture2D" uid="uid://ddwvaggq7ftyb" path="res://Sprites/moth1.png" id="3_8k0fh"]
+[ext_resource type="Texture2D" uid="uid://fqsb2cpklrsm" path="res://Sprites/moth2.png" id="4_ntvc6"]
+[ext_resource type="Texture2D" uid="uid://xu7yi5cgcmyu" path="res://Sprites/moth3.png" id="5_2ekeo"]
+[ext_resource type="Texture2D" uid="uid://bneqssnkocebb" path="res://Sprites/moth4.png" id="6_8krsk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_2ekeo")
+"texture": ExtResource("3_8k0fh")
 }],
 "loop": 1,
 "name": &"idle",
@@ -19,16 +19,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_8krsk")
+"texture": ExtResource("3_8k0fh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2ekeo")
+"texture": ExtResource("4_ntvc6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_y58gh")
+"texture": ExtResource("5_2ekeo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_0cksn")
+"texture": ExtResource("6_8krsk")
 }],
 "loop": 1,
 "name": &"walk",
@@ -67,6 +67,6 @@ position = Vector2(16, 15)
 rotation = -1.5707964
 scale = Vector2(1.9912667, 1.9912667)
 sprite_frames = SubResource("SpriteFrames_dklp6")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.45596462
+frame_progress = 0.3915119

@@ -69,4 +69,4 @@ scale = Vector2(1.9912667, 1.9912667)
 sprite_frames = SubResource("SpriteFrames_dklp6")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.45596462
+frame_progress = 0.19409847
