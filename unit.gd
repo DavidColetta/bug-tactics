@@ -17,6 +17,8 @@ extends Node2D
 	set(new_value):
 		HP = new_value
 		$HP_Bar/ProgressBar.value = new_value
+		if HP <= 0:
+			die()
 
 #@export var Species := Combat.UnitSpecies.INFANTRY
 
@@ -66,3 +68,8 @@ func _ready() -> void:
 	
 	#example of pathfinding
 	#move_to(Vector2i(6,4))
+
+func die() -> void:
+	Navigation.grid[X][Y] = null
+	Navigation.units.erase(self)
+	queue_free()
