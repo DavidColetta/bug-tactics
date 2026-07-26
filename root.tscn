@@ -63,6 +63,7 @@ metadata/_custom_type_script = "uid://bymyekdhhb35y"
 [sub_resource type="Resource" id="Resource_uwexw"]
 script = ExtResource("7_qt76e")
 unit_scene = ExtResource("12_ab83r")
+cost = 150
 metadata/_custom_type_script = "uid://bymyekdhhb35y"
 
 [node name="Node" type="Node" unique_id=1299204449]

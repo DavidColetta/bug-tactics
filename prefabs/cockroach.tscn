@@ -39,7 +39,9 @@ animations = [{
 script = ExtResource("1_jr6hm")
 X = 1
 Y = 1
-move_range = 5
+HP = 200
+DAMAGE_TO_TYPES = [25, 25, 25]
+move_range = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
 visible = false
