@@ -103,7 +103,7 @@ func _ready() -> void:
 
 func die() -> void:
 	if Team != Combat.Team.PLAYER:
-		Selection.player_pennies += 50
+		Selection.player_pennies += 100
 	Navigation.grid[X][Y] = null
 	Navigation.units.erase(self)
 	queue_free()

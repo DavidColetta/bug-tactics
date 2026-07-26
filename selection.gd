@@ -52,6 +52,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			Combat.make_unit_attack_other_unit(selected_unit, new_selected_unit)
 			Navigation.instance.unhighlight_tiles()
 			selected_unit.finished_move()
+			
+		# Prevent crash if target invalid
+		#if not is_instance_valid(selected_unit):
+			#selected_unit = null
+			#return
 		elif cell_highlighted and selected_unit.Team == Combat.Team.PLAYER and is_player_turn:
 			print("Selected highlighted cell")
 			prev_position = selected_unit.get_pos()

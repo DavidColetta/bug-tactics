@@ -31,6 +31,7 @@ animations = [{
 script = ExtResource("1_8ixff")
 X = 1
 Y = 1
+Type = 2
 DAMAGE_TO_TYPES = [50, 50, 75]
 move_range = 10
 

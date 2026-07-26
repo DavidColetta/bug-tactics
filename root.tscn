@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dvkm5ptbsff3b" path="res://prefabs/stagbeetle.tscn" id="12_ab83r"]
 [ext_resource type="PackedScene" uid="uid://6xcatlhfyme5" path="res://prefabs/ant.tscn" id="12_qwhpj"]
 [ext_resource type="Script" uid="uid://dr0kqn6p3cwmt" path="res://ai.gd" id="14_qwhpj"]
+[ext_resource type="Script" uid="uid://b2ush7r4axrm7" path="res://wave_manager.gd" id="24_ynlg5"]
 
 [sub_resource type="Resource" id="Resource_qwhpj"]
 script = ExtResource("7_qt76e")
@@ -295,6 +296,10 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="AI" type="Node" parent="." unique_id=637837545]
 script = ExtResource("14_qwhpj")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1648033040]
+script = ExtResource("24_ynlg5")
+max_y = 20
 
 [connection signal="button_down" from="UI/EndTurnButton" to="." method="end_turn"]
 [connection signal="item_selected" from="UI/ShopMenu" to="UI/ShopMenu" method="_on_shop_menu_item_selected"]
