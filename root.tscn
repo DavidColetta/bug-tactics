@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dvkm5ptbsff3b" path="res://prefabs/stagbeetle.tscn" id="12_ab83r"]
 [ext_resource type="PackedScene" uid="uid://6xcatlhfyme5" path="res://prefabs/ant.tscn" id="12_qwhpj"]
 [ext_resource type="Script" uid="uid://dr0kqn6p3cwmt" path="res://ai.gd" id="14_qwhpj"]
+[ext_resource type="Texture2D" uid="uid://k6a2jqbrapup" path="res://Sprites/ShopHill.png" id="23_ab83r"]
 [ext_resource type="Script" uid="uid://b2ush7r4axrm7" path="res://wave_manager.gd" id="24_ynlg5"]
 
 [sub_resource type="Resource" id="Resource_qwhpj"]
@@ -231,8 +232,8 @@ X = 5
 Y = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Nests/PlayerHome" unique_id=1920912820]
-scale = Vector2(32, 32)
-texture = ExtResource("1_pyidc")
+scale = Vector2(1.9787503, 1.9787503)
+texture = ExtResource("23_ab83r")
 centered = false
 
 [node name="HP_Bar" type="Control" parent="Nests/PlayerHome" unique_id=1437980340]
@@ -259,8 +260,8 @@ X = 8
 Y = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Nests/NeutralNest" unique_id=481714096]
-scale = Vector2(32, 32)
-texture = ExtResource("1_pyidc")
+scale = Vector2(2, 2)
+texture = ExtResource("23_ab83r")
 centered = false
 
 [node name="HP_Bar" type="Control" parent="Nests/NeutralNest" unique_id=1552918117]
