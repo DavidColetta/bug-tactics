@@ -55,7 +55,7 @@ func move_to(target: Vector2i):
 		# 2. Calculate direction from CURRENT grid position (X, Y)
 		var dir_x = next_x - X
 		var dir_y = next_y - Y
-		
+		# print("called")
 		if dir_x < 0:
 			animated_sprite.rotation_degrees = -90
 			print("right")
