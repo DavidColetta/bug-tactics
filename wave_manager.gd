@@ -2,8 +2,21 @@ extends Node2D
 
 @export var enemy_prefabs: Array[PackedScene] = [
 	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/ant.tscn"),
+	preload("res://prefabs/beetle.tscn"),
+	preload("res://prefabs/beetle.tscn"),
 	preload("res://prefabs/beetle.tscn"),
 	preload("res://prefabs/spider.tscn"),
+	preload("res://prefabs/spider.tscn"),
+	preload("res://prefabs/stagbeetle.tscn"),
+	preload("res://prefabs/dragonfly.tscn"),
+	preload("res://prefabs/moth.tscn"),
+	preload("res://prefabs/cockroach.tscn"),
+	preload("res://prefabs/cockroach.tscn"),
 	preload("res://prefabs/cockroach.tscn")
 ]
 
