@@ -20,6 +20,7 @@ func _ready() -> void:
 	#Navigation.grid[X][Y] = self
 	Navigation.nests.append(self)
 	
+	$HP_Bar/ProgressBar.max_value = HP
 	$HP_Bar/ProgressBar.value = HP
 
 func attack_nest(attacker: Unit):

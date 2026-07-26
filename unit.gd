@@ -91,6 +91,7 @@ func _ready() -> void:
 	Navigation.grid[X][Y] = self
 	Navigation.units.append(self)
 	
+	$HP_Bar/ProgressBar.max_value = HP
 	$HP_Bar/ProgressBar.value = HP
 	
 	#example of pathfinding
