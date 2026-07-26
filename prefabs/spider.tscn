@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://cs8rk2nfaiwyl"]
+[gd_scene format=3 uid="uid://bqcxhgwr650w6"]
 
-[ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_ca475"]
-[ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_w8udy"]
-[ext_resource type="Texture2D" uid="uid://cifhgmrxwgfgo" path="res://Sprites/beetle1.png" id="3_ca475"]
-[ext_resource type="Texture2D" uid="uid://ckk866xg0ji8v" path="res://Sprites/beetle2.png" id="4_w8udy"]
-[ext_resource type="Texture2D" uid="uid://ctrdl6pebmwbp" path="res://Sprites/beetle3.png" id="5_rfoyh"]
-[ext_resource type="Texture2D" uid="uid://dlbhu82eqhokl" path="res://Sprites/beetle4.png" id="6_ivssr"]
+[ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_5dwkk"]
+[ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_7kcwl"]
+[ext_resource type="Texture2D" uid="uid://bbotekwm38xgx" path="res://Sprites/Spider2.png" id="3_5dwkk"]
+[ext_resource type="Texture2D" uid="uid://bql3sq6k1nruh" path="res://Sprites/Spider1.png" id="4_7kcwl"]
+[ext_resource type="Texture2D" uid="uid://ds1drtfblk425" path="res://Sprites/Spider3.png" id="5_c82kk"]
+[ext_resource type="Texture2D" uid="uid://ddtfjwylossqi" path="res://Sprites/Spider4.png" id="6_epnb3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_w8udy")
+"texture": ExtResource("3_5dwkk")
 }],
 "loop": 1,
 "name": &"idle",
@@ -19,24 +19,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ca475")
+"texture": ExtResource("4_7kcwl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_w8udy")
+"texture": ExtResource("3_5dwkk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_rfoyh")
+"texture": ExtResource("5_c82kk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ivssr")
+"texture": ExtResource("6_epnb3")
 }],
 "loop": 1,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[node name="Unit2" type="Node2D" unique_id=1213522776]
-script = ExtResource("1_ca475")
+[node name="Unit" type="Node2D" unique_id=1213522776]
+script = ExtResource("1_5dwkk")
 X = 1
 Y = 1
 move_range = 5
@@ -44,7 +44,7 @@ move_range = 5
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
 visible = false
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_w8udy")
+texture = ExtResource("2_7kcwl")
 centered = false
 
 [node name="HP_Bar" type="Control" parent="." unique_id=232757828]

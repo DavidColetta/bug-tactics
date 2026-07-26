@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://cs8rk2nfaiwyl"]
+[gd_scene format=3 uid="uid://dmbfntb0r8ldt"]
 
-[ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_ca475"]
-[ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_w8udy"]
-[ext_resource type="Texture2D" uid="uid://cifhgmrxwgfgo" path="res://Sprites/beetle1.png" id="3_ca475"]
-[ext_resource type="Texture2D" uid="uid://ckk866xg0ji8v" path="res://Sprites/beetle2.png" id="4_w8udy"]
-[ext_resource type="Texture2D" uid="uid://ctrdl6pebmwbp" path="res://Sprites/beetle3.png" id="5_rfoyh"]
-[ext_resource type="Texture2D" uid="uid://dlbhu82eqhokl" path="res://Sprites/beetle4.png" id="6_ivssr"]
+[ext_resource type="Script" uid="uid://0o7ohsugnahj" path="res://unit.gd" id="1_8k0fh"]
+[ext_resource type="Texture2D" uid="uid://doeay0s82a0fu" path="res://Ant.png" id="2_ntvc6"]
+[ext_resource type="Texture2D" uid="uid://bmgqycaqwbwtb" path="res://Sprites/Stag-Beetle2.png" id="3_2ekeo"]
+[ext_resource type="Texture2D" uid="uid://86isv6xxadw8" path="res://Sprites/Stag-Beetle1.png" id="4_8krsk"]
+[ext_resource type="Texture2D" uid="uid://dejj4pxetonky" path="res://Sprites/Stag-Beetle3.png" id="5_y58gh"]
+[ext_resource type="Texture2D" uid="uid://cdo50uhm7fvdn" path="res://Sprites/Stag-Beetle4.png" id="6_0cksn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dklp6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_w8udy")
+"texture": ExtResource("3_2ekeo")
 }],
 "loop": 1,
 "name": &"idle",
@@ -19,24 +19,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ca475")
+"texture": ExtResource("4_8krsk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_w8udy")
+"texture": ExtResource("3_2ekeo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_rfoyh")
+"texture": ExtResource("5_y58gh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ivssr")
+"texture": ExtResource("6_0cksn")
 }],
 "loop": 1,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[node name="Unit2" type="Node2D" unique_id=1213522776]
-script = ExtResource("1_ca475")
+[node name="Unit" type="Node2D" unique_id=1213522776]
+script = ExtResource("1_8k0fh")
 X = 1
 Y = 1
 move_range = 5
@@ -44,7 +44,7 @@ move_range = 5
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
 visible = false
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_w8udy")
+texture = ExtResource("2_ntvc6")
 centered = false
 
 [node name="HP_Bar" type="Control" parent="." unique_id=232757828]
@@ -67,5 +67,6 @@ position = Vector2(16, 15)
 rotation = -1.5707964
 scale = Vector2(1.9912667, 1.9912667)
 sprite_frames = SubResource("SpriteFrames_dklp6")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
+frame_progress = 0.45596462
