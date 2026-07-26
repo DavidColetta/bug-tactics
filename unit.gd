@@ -71,9 +71,9 @@ func move_to(target: Vector2i):
 		
 		# 4. Move the unit (this updates X and Y for the NEXT iteration)
 		Navigation.moveUnit(X, Y, next_x, next_y)
-		animated_sprite.play("WalkAnt")
+		animated_sprite.play("walk")
 		
-	animated_sprite.play("IdleAnt")
+	animated_sprite.play("idle")
 	Events.move_animation_ended.emit()
 
 func _on_position_updated() -> void:
