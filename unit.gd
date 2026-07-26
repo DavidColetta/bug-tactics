@@ -104,6 +104,8 @@ func _ready() -> void:
 	#move_to(Vector2i(6,4))
 
 func die() -> void:
+	if Team != Combat.Team.PLAYER:
+		Selection.player_pennies += 50
 	Navigation.grid[X][Y] = null
 	Navigation.units.erase(self)
 	queue_free()

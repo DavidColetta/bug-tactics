@@ -18,16 +18,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("3_3p3ic")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("4_qxsoe")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("5_ofert")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("6_h3ca6")
 }],
 "loop": 1,
@@ -63,6 +63,7 @@ value = 76.0
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1442783930]
+z_index = 1
 position = Vector2(16, 15)
 rotation = -1.5707964
 scale = Vector2(1.9912667, 1.9912667)

@@ -18,16 +18,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("4_7kcwl")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("3_5dwkk")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("5_c82kk")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("6_epnb3")
 }],
 "loop": 1,
@@ -39,6 +39,8 @@ animations = [{
 script = ExtResource("1_5dwkk")
 X = 1
 Y = 1
+Type = 1
+DAMAGE_TO_TYPES = [75, 75, 50]
 move_range = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
@@ -67,5 +69,5 @@ position = Vector2(16, 15)
 rotation = -1.5707964
 scale = Vector2(1.9912667, 1.9912667)
 sprite_frames = SubResource("SpriteFrames_dklp6")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"

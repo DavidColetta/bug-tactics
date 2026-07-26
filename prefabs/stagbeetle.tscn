@@ -39,7 +39,9 @@ animations = [{
 script = ExtResource("1_id0wa")
 X = 1
 Y = 1
-move_range = 5
+HP = 200
+Type = 1
+DAMAGE_TO_TYPES = [75, 75, 50]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626168901]
 visible = false
@@ -69,4 +71,4 @@ scale = Vector2(1.9912667, 1.9912667)
 sprite_frames = SubResource("SpriteFrames_dklp6")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.19409847
+frame_progress = 0.19734646
